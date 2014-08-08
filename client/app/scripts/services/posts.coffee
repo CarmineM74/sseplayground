@@ -3,26 +3,23 @@
 angular.module('sseAppApp')
   .service('PostsService',
     class PostsService
-      constructor: (@$q,@$http) ->
+      constructor: (@$q,@$http,@Post) ->
         console.log('[PostsService] initializing ...')
 
       all: ->
         d = @$q.defer()
-        @$http({
-          method: 'GET'
-          url: 'http://localhost:3000/api/posts'
-        }).then((response) ->
-          d.resolve(response.data)
-        ,(reason) ->
-          d.reject(reason)
+        @Post.query().then((posts) ->
+          d.resolve(posts)
         )
-
         d.promise
 
       save: (post) ->
         d = @$q.defer()
-        @$http.post('http://localhost:3000/api/posts', {post: post})
-          .success((response) -> d.resolve(response.data))
+        post = new @Post(
+          {message: post.message}
+        ).create().then((savedPost) ->
+          d.resolve(savedPost)
+        )
 
         d.promise
     )
