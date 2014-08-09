@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Login</h2>
+    <form name="loginForm"
+      role="form"
+      ng-submit="ctrl.submitLogin()"
+      class="form-inline">
+      <div class="form-group">
+        <label for="login.email"
+          class="sr-only">Email</label>
+        <input type="email"
+          class="form-control"
+          placeholder="your email"
+          name="login.email"
+          ng-model="ctrl.login.email"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="login.password"
+          class="sr-only">Password</label>
+        <input type="password"
+          class="form-control"
+          placeholder="your password"
+          name="login.password"
+          ng-model="ctrl.login.password"
+          required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+      </div>
+    </form>
+    <div ng-if="ctrl.login.errors" class="alert alert-danger">
+      <h2>{{ctrl.login.errors}}</h2>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2>Signup</h2>
+    <form name="signupForm"
+      role="form"
+      ng-submit="ctrl.submitSignup()">
+      <div class="form-group">
+        <label for="signup.email">Email address</label>
+        <input type="email"
+          class="form-control"
+          placeholder="your email"
+          name="signup.email"
+          ng-model="ctrl.singup.email"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="signup.password">Password</label>
+        <input type="password"
+          class="form-control"
+          placeholder="your password"
+          name="signup.password"
+          ng-model="ctrl.singup.password"
+          required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg">Signup</button>
+      </div>
+    </form>
+    <div ng-if="ctrl.signup.errors" class="alert alert-danger">
+      <h2>{{ctrl.signup.errors}}</h2>
+    </div>
+  </div>
+</div>

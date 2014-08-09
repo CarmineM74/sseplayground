@@ -16,6 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'sseAppApp.controllers'
     'sseAppApp.resources'
   ])
   .config ($routeProvider) ->
@@ -23,6 +24,9 @@ angular
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
+      .when '/login',
+        templateUrl: 'views/login.html'
+        controller: 'LoginController as ctrl'
       .otherwise
         redirectTo: '/'
 
