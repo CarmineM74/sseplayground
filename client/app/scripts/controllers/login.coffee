@@ -2,16 +2,27 @@
 angular.module('sseAppApp.controllers')
   .controller('LoginController',
     class LoginController
-      constructor: ->
+      constructor: (@$location,@UsersService) ->
         console.log('[LoginController] initializing ...')
+
+        @UsersService.currentUser().then((user) => @user = user)
 
       singup: {}
       login: {}
+      user: null
 
       submitSignup: ->
-        console.log('[LoginController] signup: ' + JSON.stringify(@signup))
+        @UsersService.login(@signup).then((user) =>
+          console.log('[LoginController] registered as: ' + JSON.stringify(user))
+          @user = user
+          @$location.path('/')
+        )
 
       submitLogin: ->
-        console.log('[LoginController] login: ' + JSON.stringify(@login))
+        @UsersService.login(@login).then((user) =>
+          console.log('[LoginController logged in as: ' + JSON.stringify(user))
+          @user = user
+          @$location.path('/')
+        )
 
   )

@@ -16,7 +16,9 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'sseAppApp.controllers'
+    'sseAppApp.directives',
+    'sseAppApp.services',
+    'sseAppApp.controllers',
     'sseAppApp.resources'
   ])
   .config ($routeProvider) ->
