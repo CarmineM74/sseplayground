@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('sseAppApp')
+angular.module('sseAppApp.services')
   .service('PostsService',
     class PostsService
       constructor: (@$q,@$http,@Post) ->

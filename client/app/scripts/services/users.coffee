@@ -3,43 +3,53 @@
 angular.module('sseAppApp.services')
   .service('UsersService',
     class UsersService
-      constructor: (@$q,@$cookieStore,@$rootScope)->
+      constructor: (@$q,@$cookieStore,@$rootScope,@$auth,@User)->
         console.log('[UsersService] initializing ...')
 
       _user: null
 
-      setCurrentUser: (u) ->
-        @_user = u
-        @$cookieStore.put('user',u)
-        @$rootScope.$broadcast("user:set", u)
+      setCurrentUser: (id) ->
+        @$cookieStore.put('user',id)
+        @User.findById(id).then((user) =>
+          @_user = user
+          @$rootScope.$broadcast("user:set", @_user)
+        )
+
+      unsetCurrentUser: ->
+        @_user = null
+        @$cookieStore.remove('user')
+        @$rootScope.$broadcast("user:unset")
 
       currentUser: ->
         d = @$q.defer()
 
-        if @_user
-          d.resolve @_user
-        else if @$cookieStore.get('user')
-          @setCurrentUser(@$cookieStore.get('user'))
-          d.resolve @_user
-        else
-          d.resolve null
+        @$auth.validateUser().then((x) =>
+          if @$cookieStore.get('user')
+            @setCurrentUser(@$cookieStore.get('user'))
+          else
+            d.resolve null
+        ).catch((e) =>
+          console.log("No valid authenticated user: " + JSON.stringify(e))
+          @unsetCurrentUser()
+        )
 
         d.promise
 
       login: (user) ->
         d = @$q.defer()
 
-        @setCurrentUser(user)
-        d.resolve(user)
+        @$auth.submitLogin(user).then((id) =>
+          @setCurrentUser(id)
+          d.resolve(@_user)
+        )
 
         d.promise
 
       logout: ->
         d = @$q.defer()
 
-        @_user = null
-        @$cookieStore.remove('user')
-        @$rootScope.$broadcast("user:unset")
+        @$auth.signOut()
+        @unsetCurrentUser()
         d.resolve()
 
         d.promise

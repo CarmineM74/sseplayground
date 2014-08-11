@@ -13,7 +13,6 @@ angular.module('sseAppApp.directives')
 
         UsersService.currentUser().then((user) -> $scope.currentUser = user)
 
-
         $scope.logout = ->
           UsersService.logout().then(-> $scope.currentUser = null)
     }

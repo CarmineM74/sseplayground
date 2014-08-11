@@ -28,6 +28,7 @@ angular.module('sseAppApp')
     ,false)
 
     PostsService.all().then((posts) =>
+      console.log("Requesting all posts ...")
       $scope.posts = posts
     )
 

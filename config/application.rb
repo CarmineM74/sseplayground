@@ -25,6 +25,7 @@ module Sseplayground
         origins 'http://localhost:3000','http://localhost:9000'
         resource '*',
           headers: :any,
+          expose: ['Authorization'], # <-- Important for
           methods: [:get, :post, :put, :delete, :options]
       end
     end
