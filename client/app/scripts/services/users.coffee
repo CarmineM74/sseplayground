@@ -3,7 +3,7 @@
 angular.module('sseAppApp.services')
   .service('UsersService',
     class UsersService
-      constructor: (@$q,@$cookieStore)->
+      constructor: (@$q,@$cookieStore,@$rootScope)->
         console.log('[UsersService] initializing ...')
 
       _user: null
@@ -11,6 +11,7 @@ angular.module('sseAppApp.services')
       setCurrentUser: (u) ->
         @_user = u
         @$cookieStore.put('user',u)
+        @$rootScope.$broadcast("user:set", u)
 
       currentUser: ->
         d = @$q.defer()
@@ -38,6 +39,7 @@ angular.module('sseAppApp.services')
 
         @_user = null
         @$cookieStore.remove('user')
+        @$rootScope.$broadcast("user:unset")
         d.resolve()
 
         d.promise

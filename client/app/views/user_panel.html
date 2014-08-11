@@ -1,5 +1,5 @@
 <div ng-if="currentUser">
-  Logged in as <a ng-ref="/user/{{currentUser.id}}">{{currentUser.email}}</a>
+  Logged in as {{currentUser.email}}
   (<a ng-click="logout()">Log out</a>)
 </div>
 <div ng-if="!currentUser">

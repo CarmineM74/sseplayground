@@ -12,3 +12,5 @@ gem 'redis_props'
 gem 'nest'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
+
+gem 'devise', "=3.2.4"
