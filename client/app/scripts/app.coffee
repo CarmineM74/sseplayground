@@ -41,5 +41,5 @@ angular
         templateUrl: 'views/login.html'
         controller: 'LoginController as ctrl'
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/login'
 
