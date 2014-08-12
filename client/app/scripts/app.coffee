@@ -17,6 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ng-token-auth',
+    'sseAppApp.interceptors',
     'sseAppApp.directives',
     'sseAppApp.services',
     'sseAppApp.controllers',
@@ -43,3 +44,5 @@ angular
       .otherwise
         redirectTo: '/login'
 
+  .run ($rootScope, $location) ->
+    $rootScope.$on('event:unauthorized', -> $location.path('/login'))

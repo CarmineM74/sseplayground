@@ -6,6 +6,8 @@ angular.module('sseAppApp.services')
       constructor: (@$q,@$cookieStore,@$rootScope,@$auth,@User)->
         console.log('[UsersService] initializing ...')
 
+        @$rootScope.$on('event:unauthorized', => @logout())
+
       _user: null
 
       setCurrentUser: (id) ->

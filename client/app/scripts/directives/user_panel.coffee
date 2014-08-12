@@ -11,6 +11,10 @@ angular.module('sseAppApp.directives')
           $scope.currentUser = currentUser
         )
 
+        $scope.$on("user:unset", (evt,currentUser) ->
+          $scope.currentUser = null
+        )
+
         UsersService.currentUser().then((user) -> $scope.currentUser = user)
 
         $scope.logout = ->
