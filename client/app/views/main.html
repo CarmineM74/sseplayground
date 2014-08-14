@@ -11,6 +11,7 @@
   </div>
   <div class="col-xs-4">
     <h3>Posts feed</h3>
+    <a class="btn btn-default" ng-click="refreshPosts()">Refresh</a>
     <div ng-repeat="post in posts">
       <span style="font-size: 10px">[{{post.createdAt|date:'dd/MM hh:mm:ss'}}]: {{post.message}}</span>
     </div>

@@ -16,7 +16,13 @@ angular.module('sseAppApp')
 
     stream.addEventListener('open', (e) =>
       $scope.$apply(->
-        console.log('Stream opened')
+        console.log('Stream OPENED!')
+      )
+    ,false)
+
+    stream.addEventListener('close', (e) =>
+      $scope.$apply(->
+        console.log('Stream CLOSED!')
       )
     ,false)
 
@@ -27,10 +33,20 @@ angular.module('sseAppApp')
       )
     ,false)
 
-    PostsService.all().then((posts) =>
-      console.log("Requesting all posts ...")
-      $scope.posts = posts
-    )
+    stream.addEventListener('posts.flush', (e) =>
+      $scope.$apply(
+        console.log('Posts flushed!' + JSON.stringify(e.data))
+        $scope.refreshPosts()
+      )
+    ,false)
+
+    $scope.refreshPosts = ->
+      PostsService.all().then((posts) =>
+        console.log("Requesting all posts ...")
+        $scope.posts = posts
+      )
 
     $scope.postMessage = ->
       PostsService.save($scope.post)
+
+    $scope.refreshPosts()

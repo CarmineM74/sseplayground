@@ -19,3 +19,7 @@ gem 'devise', "=3.2.4"
 # devise_token_auth is required for ngTokenAuth
 gem 'devise_token_auth'
 gem 'omniauth'
+
+gem 'sinatra'
+gem 'sidekiq'
+gem 'sidetiq'
