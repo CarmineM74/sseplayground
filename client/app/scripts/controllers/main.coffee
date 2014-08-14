@@ -20,9 +20,9 @@ angular.module('sseAppApp')
       )
     ,false)
 
-    stream.addEventListener('close', (e) =>
+    stream.addEventListener('heartbeat', (e) =>
       $scope.$apply(->
-        console.log('Stream CLOSED!')
+        console.log('*** heartbeat ***')
       )
     ,false)
 

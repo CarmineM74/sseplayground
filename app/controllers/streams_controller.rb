@@ -5,7 +5,7 @@ class StreamsController < ApplicationController
     response.headers['Content-Type'] = "text/event-stream"
     sse = SSE.new(response.stream)
     redis = Redis.new
-    redis.psubscribe('posts.*') do |on|
+    redis.psubscribe(['posts.*','heartbeat']) do |on|
       on.psubscribe do |evt, total|
         Rails.logger.info "Subscribed to #{evt} total: #{total}"
       end
