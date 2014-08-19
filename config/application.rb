@@ -22,7 +22,7 @@ module Sseplayground
 
     config.middleware.use Rack::Cors do
       allow do
-#        origins 'http://localhost:3000','http://localhost:9000','http://0.0.0.0:9000','http://192.168.1.31:3000','http://192.168.1.31:9000'
+        # WARNING: ALLOWS CONNECTIONS AND INTERACTIONS FROM ANYWHERE
         origins '*'
         resource '*',
           headers: :any,
