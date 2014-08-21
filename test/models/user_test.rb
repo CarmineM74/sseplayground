@@ -18,6 +18,15 @@ class UserTest < ActiveSupport::TestCase
     assert_includes bayharbor_butcher.errors[:email], 'has already been taken'
   end
 
+  test "must have a password" do
+    assert_invalid User.new(email: "iam@invalid.com")
+    assert_valid User.new(email: "iam@valid.com", password: default_password)
+  end
+
+  test "minimum password length is 8" do
+    assert_invalid User.new(email: "iam@invalid.com", password: "short"), password: "is too short (minimum is 8 characters)"
+  end
+
   test "User.inactives include Sgt. Doakes" do
     assert_includes User.inactives, users(:doakes)
     refute_includes User.inactives, users(:dexter)
