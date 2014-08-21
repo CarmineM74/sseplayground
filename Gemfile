@@ -23,3 +23,7 @@ gem 'omniauth'
 gem 'sinatra'
 gem 'sidekiq'
 gem 'sidetiq'
+
+group :test do
+  gem 'minitest'
+end

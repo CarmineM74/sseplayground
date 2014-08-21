@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :email, presence: true, uniqueness: true
+
+  scope :inactives, -> { where(sign_in_count: 0) }
+
 end

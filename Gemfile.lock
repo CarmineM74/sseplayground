@@ -138,6 +138,7 @@ PLATFORMS
 DEPENDENCIES
   devise (= 3.2.4)
   devise_token_auth
+  minitest
   nest
   omniauth
   puma
