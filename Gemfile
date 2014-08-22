@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.5'
 
 gem 'rails-api'
 
@@ -13,7 +13,7 @@ gem 'nest'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
 
-gem 'devise', "=3.2.4"
+gem 'devise' #, "=3.2.4"
 
 # devise_token_auth depends on omniauth
 # devise_token_auth is required for ngTokenAuth

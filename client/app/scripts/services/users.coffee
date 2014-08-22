@@ -12,11 +12,11 @@ angular.module('sseAppApp.services')
 
       setCurrentUser: (id) ->
         @$cookieStore.put('user',id)
+        console.log('[setCurrentUser] auth_headers: ' + JSON.stringify(@$cookieStore.get('auth_headers')))
         @User.findById(id).then((user) =>
           @_user = user
           @_user.auth_header = @$cookieStore.get('auth_header')
           #console.log('[setCurrentUser]: ' + JSON.stringify(@_user))
-#          console.log('[setCurrentUser] auth_header: ' + JSON.stringify(@_user.auth_header))
 #          console.log('[setCurrentUser] parseExpiry: ' + @$auth.parseExpiry(@_user.auth_header))
           @$rootScope.$broadcast("user:set", @_user)
         )

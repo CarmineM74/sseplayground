@@ -25,7 +25,7 @@ angular
   ])
   .config(($authProvider) ->
     $authProvider.configure({
-      apiUrl: 'http://localhost:3000/api'
+      apiUrl: '/api'
     })
   )
   .config ($routeProvider) ->

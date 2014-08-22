@@ -20,13 +20,15 @@ module Sseplayground
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.api_only = true
+
     config.middleware.use Rack::Cors do
       allow do
         # WARNING: ALLOWS CONNECTIONS AND INTERACTIONS FROM ANYWHERE
         origins '*'
         resource '*',
           headers: :any,
-          expose: ['Authorization'], # <-- Important for
+          expose: ['access-token','expiry', 'token-type', 'uid', 'client'],
           methods: [:get, :post, :put, :delete, :options]
       end
     end
