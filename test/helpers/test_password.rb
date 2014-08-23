@@ -1,4 +1,4 @@
-module TestPasswordHelper
+module TestPasswordHelpers
   def password_digest(password)
     User.new.send(:password_digest,password)
   end
