@@ -8,7 +8,7 @@
  # Controller of the sseAppApp
 ###
 angular.module('sseAppApp')
-  .controller 'MainCtrl', ($scope,PostsService) ->
+  .controller 'MainCtrl', ($scope,PostsService,UsersService) ->
     $scope.posts = []
     $scope.post = {}
 
@@ -47,6 +47,9 @@ angular.module('sseAppApp')
       )
 
     $scope.postMessage = ->
-      PostsService.save($scope.post)
+      UsersService.currentUser().then((user) ->
+        $scope.post.user_id = user.id
+        PostsService.save($scope.post)
+      )
 
     $scope.refreshPosts()

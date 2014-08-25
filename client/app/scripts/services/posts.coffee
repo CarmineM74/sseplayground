@@ -16,7 +16,7 @@ angular.module('sseAppApp.services')
       save: (post) ->
         d = @$q.defer()
         post = new @Post(
-          {message: post.message}
+          {message: post.message, user_id: post.user_id}
         ).create().then((savedPost) ->
           d.resolve(savedPost)
         )

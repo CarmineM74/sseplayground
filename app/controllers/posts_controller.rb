@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(params.require(:post).permit(:message))
+    post = Post.new(params.require(:post).permit(:message, :user_id))
     if post.save
       Redis.current.publish('posts.create',post.to_json)
       render status: :ok,

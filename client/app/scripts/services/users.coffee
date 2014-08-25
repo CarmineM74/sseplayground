@@ -16,8 +16,6 @@ angular.module('sseAppApp.services')
         @User.findById(id).then((user) =>
           @_user = user
           @_user.auth_header = @$cookieStore.get('auth_header')
-          #console.log('[setCurrentUser]: ' + JSON.stringify(@_user))
-#          console.log('[setCurrentUser] parseExpiry: ' + @$auth.parseExpiry(@_user.auth_header))
           @$rootScope.$broadcast("user:set", @_user)
         )
 
@@ -32,6 +30,7 @@ angular.module('sseAppApp.services')
         @$auth.validateUser().then((x) =>
           if @$cookieStore.get('user')
             @setCurrentUser(@$cookieStore.get('user'))
+            d.resolve @_user
           else
             d.resolve null
         ).catch((e) =>
