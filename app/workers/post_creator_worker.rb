@@ -6,6 +6,7 @@ class PostCreatorWorker
 
   def perform(last_occurrence, current_occurrence)
     post = Post.new(message: "Posted at #{current_occurrence}")
+    post.user = User.first
     if post.save
       Redis.current.publish('posts.create', post.to_json)
     end
