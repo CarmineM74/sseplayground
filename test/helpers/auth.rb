@@ -14,6 +14,9 @@ module AuthHelpers
     @token = @auth_headers['access-token']
     @client_id = @auth_headers['client']
     @expiry = @auth_headers['expiry']
+
+    age_token(@user,@client_id)
+    request.headers.merge!(@auth_headers)
   end
 
   def logout
