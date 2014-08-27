@@ -28,6 +28,15 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :unauthorized
   end
 
+  test "post create is unsuccessful when data is not valid" do
+    post = Post.new(message: 'a brave new world')
+    login_as(users(:dexter))
+    age_token(@user,@client_id)
+    request.headers.merge!(@auth_headers)
+    xhr :post, :create, format: :json, post: post.attributes
+    assert_response :unprocessable_entity
+  end
+
   test "post create is successful when logged in and data is valid" do
     post = Post.new(message: 'a brave new world', user_id: users(:dexter).id)
     login_as(users(:dexter))
@@ -36,12 +45,9 @@ class PostsControllerTest < ActionController::TestCase
     xhr :post, :create, format: :json, post: post.attributes
     assert_response :ok
 
-    get_response_auth_headers
-
-    # make post invalid by removing user reference
-    post.user = nil
-    xhr :post, :create, format: :json, post: post.attributes
-    assert_response :unprocessable_entity
+    # checks that response returns the created post
+    created_post = JSON.parse(response.body)
+    assert_equal created_post['message'], post.message
   end
 
   test "post create when sucessful publish 'posts.create' to redis" do
