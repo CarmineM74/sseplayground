@@ -24,6 +24,9 @@ gem 'sinatra'
 gem 'sidekiq'
 gem 'sidetiq'
 
+gem 'prawn'
+gem 'prawn-table'
+
 group :test do
   gem 'minitest'
 end
