@@ -15,13 +15,15 @@ angular.module('sseAppApp.services')
         console.log('[setCurrentUser] auth_headers: ' + JSON.stringify(@$cookieStore.get('auth_headers')))
         @User.findById(id).then((user) =>
           @_user = user
-          @_user.auth_header = @$cookieStore.get('auth_header')
+          @_user.auth_header = @$cookieStore.get('auth_headers')
           @$rootScope.$broadcast("user:set", @_user)
         )
 
       unsetCurrentUser: ->
+        console.log('[unsetCurrentUser] Clearing user and cookies!')
         @_user = null
         @$cookieStore.remove('user')
+        @$cookieStore.remove('auth_headers')
         @$rootScope.$broadcast("user:unset")
 
       currentUser: ->

@@ -63,4 +63,12 @@ angular.module('sseAppApp')
         PostsService.save($scope.post)
       )
 
+#    $scope.$on('auth:logout-success', ->
+#      alert('logged out!')
+#    )
+#
+#    $scope.$on('auth:logout-error', (data) ->
+#      alert('logout failed!')
+#    )
+
     $scope.refreshPosts()
