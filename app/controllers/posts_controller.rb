@@ -23,6 +23,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def pdf
+    send_file params.require(:path), disposition: 'inline', type: 'application/pdf'
+  end
+
 private
 
   def check_authorization

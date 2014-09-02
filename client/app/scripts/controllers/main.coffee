@@ -8,7 +8,7 @@
  # Controller of the sseAppApp
 ###
 angular.module('sseAppApp')
-  .controller 'MainCtrl', ($scope,PostsService,UsersService) ->
+  .controller 'MainCtrl', ($scope,$window,$sce,PostsService,UsersService) ->
     $scope.posts = []
     $scope.post = {}
 
@@ -37,6 +37,17 @@ angular.module('sseAppApp')
       $scope.$apply(
         console.log('Posts flushed!' + JSON.stringify(e.data))
         $scope.refreshPosts()
+      )
+    ,false)
+
+    stream.addEventListener('posts.pdf', (e) =>
+      $scope.$apply(
+        console.log('PDF READY!' + JSON.stringify(e.data))
+        PostsService.getPdf(e.data).then((data) =>
+          blob = new Blob([data], {type: 'application/pdf'})
+          url = ($window.URL || window.webkitURL).createObjectURL(blob)
+          $scope.pdf_path = $sce.trustAsResourceUrl(url)
+        )
       )
     ,false)
 

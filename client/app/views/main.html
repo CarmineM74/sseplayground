@@ -10,6 +10,8 @@
       </div>
       <button type='submit' class="btn btn-default" ng-click='postMessage()'>Post</button>
     </form>
+    <iframe style="display: none;" ng-src="{{pdf_path}}"></iframe>
+    <a download="posts.pdf" ng-href="{{pdf_path}}">Download pdf</a>
   </div>
   <div class="col-xs-4">
     <h3>Posts feed</h3>

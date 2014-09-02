@@ -3,7 +3,7 @@
 angular.module('sseAppApp.services')
   .service('PostsService',
     class PostsService
-      constructor: (@$q,@$http,@Post) ->
+      constructor: (@$q,@$http,@$window,@Post) ->
         console.log('[PostsService] initializing ...')
 
       all: ->
@@ -21,5 +21,12 @@ angular.module('sseAppApp.services')
           d.resolve(savedPost)
         )
 
+        d.promise
+
+      getPdf: (path) ->
+        d = @$q.defer()
+        @Post.$get('/api/pdf', {path: './public/' + path}).then((data) ->
+          d.resolve(data)
+        )
         d.promise
     )

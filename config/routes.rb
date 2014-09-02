@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :posts
     get '/stream' => "streams#stream"
+    get '/pdf' => "posts#pdf"
   end
 end

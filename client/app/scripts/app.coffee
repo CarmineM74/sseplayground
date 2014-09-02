@@ -23,7 +23,12 @@ angular
     'sseAppApp.controllers',
     'sseAppApp.resources'
   ])
-  .config(($authProvider) ->
+  .config(($authProvider,$compileProvider) ->
+    # This is needed to allow links to blobs otherwise marked
+    # as unsafe. Under this circumstance, clicking on the link
+    # would lead to an error page.
+    # http://stackoverflow.com/questions/15606751/angular-changes-urls-to-unsafe-in-extension-page
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/)
     $authProvider.configure({
       apiUrl: '/api'
     })

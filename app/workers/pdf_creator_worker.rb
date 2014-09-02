@@ -9,7 +9,7 @@ class PdfCreatorWorker
     pdf = PostsListPdf.new(posts)
     pdf.body
     pdf.save('./public/posts.pdf')
-    Redis.current.publish('posts.pdf', './public/posts.pdf')
+    Redis.current.publish('posts.pdf', 'posts.pdf')
   end
 
 end
