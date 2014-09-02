@@ -7,7 +7,8 @@ class PdfCreatorWorker
   def perform(last_occurrence, current_occurrence)
     posts = Post.all
     pdf = PostsListPdf.new(posts)
-    pdf.render_file('./public/posts.pdf')
+    pdf.body
+    pdf.save('./public/posts.pdf')
     Redis.current.publish('posts.pdf', './public/posts.pdf')
   end
 
