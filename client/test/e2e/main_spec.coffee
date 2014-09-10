@@ -5,7 +5,7 @@ describe 'main', ->
     ptor = undefined
 
     beforeEach ->
-      browser.get('http://0.0.0.0:9000/')
+      browser.get('/')
       ptor = protractor.getInstance()
 
     it 'should redirect to login', ->

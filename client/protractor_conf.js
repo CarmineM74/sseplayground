@@ -9,6 +9,8 @@ exports.config = {
     'browserName': 'chrome'
   },
 
+  baseUrl: 'http://127.0.0.1:9000/',
+
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
