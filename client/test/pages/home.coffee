@@ -6,6 +6,7 @@ class HomePage
 
   get: ->
     browser.get '/'
+    browser.getCurrentUrl()
 
 
 module.exports = HomePage

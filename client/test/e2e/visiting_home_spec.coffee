@@ -7,13 +7,12 @@ describe 'Visiting home: /', ->
   describe 'when not logged in', ->
 
     ptor = undefined
+    home = new Pages.HomePage()
 
     beforeEach ->
-      home = new Pages.HomePage()
-      home.get()
       ptor = protractor.getInstance()
 
     it 'redirects to /login', ->
-      expect(ptor.getCurrentUrl()).toMatch(/\/login/)
+      expect(home.get()).toMatch(/\/login/)
 
 
