@@ -5,6 +5,7 @@ describe 'Visiting home: /', ->
   Pages = require('../pages')
 
   home = new Pages.HomePage()
+  login = new Pages.LoginPage()
   ptor = protractor.getInstance()
 
   describe 'when not logged in', ->
@@ -14,6 +15,13 @@ describe 'Visiting home: /', ->
 
   describe 'after log in', ->
 
+    beforeEach ->
+      login.get()
+      login
+        .setUserName('carmine@moleti.it')
+        .setUserPassword('testmeme')
+        .clickLogin()
+
     it 'is on /', ->
-      expect(true).toBe(true)
+      expect(ptor.getCurrentUrl()).toMatch(/\//)
 
