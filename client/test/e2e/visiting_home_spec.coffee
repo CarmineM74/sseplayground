@@ -12,4 +12,8 @@ describe 'Visiting home: /', ->
     it 'redirects to /login', ->
       expect(home.get()).toMatch(/\/login/)
 
+  describe 'after log in', ->
+
+    it 'is on /', ->
+      expect(true).toBe(true)
 
