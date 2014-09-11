@@ -1,4 +1,4 @@
-describe 'main', ->
+describe 'Visiting home: /', ->
 
   describe 'when not logged in', ->
 
@@ -8,6 +8,8 @@ describe 'main', ->
       browser.get('/')
       ptor = protractor.getInstance()
 
-    it 'should redirect to login', ->
+    it 'redirects to /login', ->
       expect(true).toBe true
+
+
 
