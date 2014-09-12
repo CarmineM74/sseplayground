@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-8">
     <h2>Post form</h2>
-    <form name="post_form" role='form' novalidate>
+    <form id='post-form' name="post_form" role='form' novalidate>
       <div class='form-group'>
         <label for='post_message'>Message</label>
         <input type="text" class='form-control' id='post_message' placeholder='enter your message' ng-model='post.message' 
@@ -15,8 +15,8 @@
   </div>
   <div class="col-xs-4">
     <h3>Posts feed</h3>
-    <a class="btn btn-default" ng-click="refreshPosts()">Refresh</a>
-    <div ng-repeat="post in posts">
+    <a id='refresh-posts' class="btn btn-default" ng-click="refreshPosts()">Refresh</a>
+    <div id='posts-list' ng-repeat="post in posts">
       <span style="font-size: 10px">[{{post.createdAt|date:'dd/MM hh:mm:ss'}}]: {{post.message}}</span>
     </div>
   </div>
