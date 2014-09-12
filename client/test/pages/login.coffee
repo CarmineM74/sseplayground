@@ -2,20 +2,23 @@
 
 class LoginPage
   constructor: ->
-    @txtUserName = element(By.model('ctrl.login.email'))
-    @txtUserPassword = element(By.model('ctrl.login.password'))
+    @loginForm = element(By.id('login-form'))
+    @txtLoginEmail = element(By.model('ctrl.login.email'))
+    @txtLoginPassword = element(By.model('ctrl.login.password'))
     @btnLogin = element(By.id('btnSubmitLogin'))
+
+    @signupForm = element(By.id('signup-form'))
 
   get: ->
     browser.get '#/login'
     browser.getCurrentUrl()
 
   setUserName: (userName) ->
-    @txtUserName.sendKeys(userName)
+    @txtLoginEmail.sendKeys(userName)
     @
 
   setUserPassword: (password) ->
-    @txtUserPassword.sendKeys(password)
+    @txtLoginPassword.sendKeys(password)
     @
 
   clickLogin: ->
