@@ -1,4 +1,4 @@
-describe 'Visiting home: /', ->
+describe 'Visiting /:', ->
 
   # PageObjects bulk require
   # http://spin.atomicobject.com/2014/08/08/page-objects-angular-protractor-specs/
@@ -11,7 +11,7 @@ describe 'Visiting home: /', ->
   describe 'when not logged in', ->
 
     it 'redirects to /login', ->
-      expect(home.get()).toMatch(/\/login/)
+      expect(home.get()).toMatch(/#\/login$/)
 
   describe 'after log in', ->
 
@@ -23,5 +23,5 @@ describe 'Visiting home: /', ->
         .clickLogin()
 
     it 'is on /', ->
-      expect(ptor.getCurrentUrl()).toMatch(/\//)
+      expect(ptor.getCurrentUrl()).toMatch(/#\/$/)
 
