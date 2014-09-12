@@ -25,3 +25,6 @@ describe 'Visiting /:', ->
     it 'is on /', ->
       expect(ptor.getCurrentUrl()).toMatch(/#\/$/)
 
+    it 'has a form to post messages', ->
+      expect(home.postForm).toBeDefined()
+
