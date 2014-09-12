@@ -8,7 +8,7 @@ angular.module('sseAppApp.resources')
 
       @findById: (id) ->
         d = $q.defer()
-        @query({user_id: id}).then((users) =>
+        @query({id: id}).then((users) =>
           if users.length > 0
             user = users[0]
             d.resolve(user)

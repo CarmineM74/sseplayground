@@ -12,9 +12,8 @@ angular.module('sseAppApp.controllers')
       user: null
 
       submitSignup: ->
-        @UsersService.login(@signup).then((user) =>
+        @UsersService.signup(@signup).then((user) =>
           console.log('[LoginController] registered as: ' + JSON.stringify(user))
-          @user = user
           @$location.path('/')
         )
 

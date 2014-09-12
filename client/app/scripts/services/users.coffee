@@ -11,6 +11,7 @@ angular.module('sseAppApp.services')
       _user: null
 
       setCurrentUser: (id) ->
+        id = id.id
         @$cookieStore.put('user',id)
         console.log('[setCurrentUser] auth_headers: ' + JSON.stringify(@$cookieStore.get('auth_headers')))
         @User.findById(id).then((user) =>
@@ -39,6 +40,22 @@ angular.module('sseAppApp.services')
           console.log("No valid authenticated user: " + JSON.stringify(e))
           @unsetCurrentUser()
         )
+
+        d.promise
+
+      signup: (user) ->
+        d = @$q.defer()
+
+        @$auth.submitRegistration(user)
+          .then((resp) =>
+            d.resolve(resp.data.data)
+          )
+          .catch((resp) =>
+            console.log('Signup failed: ' + JSON.stringify(resp))
+            @$auth.signOut()
+            @unsetCurrentUser()
+            d.resolve null
+          )
 
         d.promise
 
