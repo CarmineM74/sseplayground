@@ -7,19 +7,24 @@ angular.module('sseAppApp.controllers')
 
         @UsersService.currentUser().then((user) => @user = user)
 
-      singup: {}
+      signup: {}
       login: {}
       user: null
 
       submitSignup: ->
         @UsersService.signup(@signup).then((user) =>
           console.log('[LoginController] registered as: ' + JSON.stringify(user))
-          @$location.path('/')
+          @signup.success = true
+          @signup.errors = undefined
+        ).catch((errors) =>
+          console.log('[LoginController] Signup failed: ' + JSON.stringify(errors))
+          @signup.success = false
+          @signup.errors = errors
         )
 
       submitLogin: ->
         @UsersService.login(@login).then((user) =>
-          console.log('[LoginController logged in as: ' + JSON.stringify(user))
+          console.log('[LoginController] logged in as: ' + JSON.stringify(user))
           @user = user
           @$location.path('/')
         )

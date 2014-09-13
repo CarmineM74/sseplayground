@@ -54,7 +54,7 @@ angular.module('sseAppApp.services')
             console.log('Signup failed: ' + JSON.stringify(resp))
             @$auth.signOut()
             @unsetCurrentUser()
-            d.resolve null
+            d.reject(resp.data.errors)
           )
 
         d.promise
