@@ -30,12 +30,8 @@ angular.module('sseAppApp.services')
       currentUser: ->
         d = @$q.defer()
 
-        @$auth.validateUser().then((x) =>
-          if @$cookieStore.get('user')
-            @setCurrentUser(@$cookieStore.get('user'))
-            d.resolve @_user
-          else
-            d.resolve null
+        @$auth.validateUser().then((user) =>
+          d.resolve @_user
         ).catch((e) =>
           console.log("No valid authenticated user: " + JSON.stringify(e))
           @unsetCurrentUser()
