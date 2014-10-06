@@ -17,7 +17,7 @@ gem 'devise' #, "=3.2.4"
 
 # devise_token_auth depends on omniauth
 # devise_token_auth is required for ngTokenAuth
-gem 'devise_token_auth'
+gem 'devise_token_auth', ">=0.1.29.beta6"
 gem 'omniauth'
 
 gem 'sinatra'
