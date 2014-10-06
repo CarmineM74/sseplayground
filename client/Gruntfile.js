@@ -1,4 +1,4 @@
-// Generated on 2014-10-06 using generator-angular 0.9.5
+// Generated on 2014-09-16 using generator-angular 0.9.5
 'use strict';
 
 // # Globbing
@@ -66,21 +66,60 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 3000
+      }],
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
-            return [
+          middleware: function (connect,opts) {
+            if (!Array.isArray(opts.base)) {
+              opts.base = [opts.base];
+            }
+            var middlewares = [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
+                  '/bower_components',
+                  connect.static('./bower_components')
+                  ),
+              connect().use(
+                  '/css',
+                  connect.static('./smartadmin/css')
+                  ),
+              connect().use(
+                  '/app/scripts/js',
+                  connect.static('./app/scripts/js')
+                  ),
+              connect().use(
+                  '/img',
+                  connect.static('./dist/img')
+                  ),
+              connect().use(
+                  '/sound',
+                  connect.static('./dist/sound')
+                  ),
+              connect().use(
+                  '/js/langs',
+                  connect.static('./dist/js/langs')
+                  ),
+              connect().use(
+                  '/fonts',
+                  connect.static('./dist/fonts')
+                  ),
               connect.static(appConfig.app)
             ];
+
+            // Make directory browse-able
+            var directory = opts.directory || opts.base[opts.base.length - 1];
+            middlewares.push(connect.directory(directory));
+
+            return middlewares;
           }
         }
       },
@@ -123,6 +162,13 @@ module.exports = function (grunt) {
 
     // Empties folders to start fresh
     clean: {
+      // CarmineM74 - Cleans copied untouched smartadmin js files
+      smartadmin: {
+        files: [{
+          dot: true,
+          src: ['<%= yeoman.app %>/scripts/js']
+        }]
+      },
       dist: {
         files: [{
           dot: true,
@@ -154,7 +200,8 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
-        cwd: '<%= yeoman.app %>'
+        // CarmineM74 - Required, otherwise grunt build complains. grunt v0.4.5, node v0.10.32
+        //cwd: '<%= yeoman.app %>'
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -252,9 +299,19 @@ module.exports = function (grunt) {
       }
     },
 
+    // CarmineM74 - mangle set to false in order to overcome the "undefined aProvider"
+    //              Suggestion came from: http://stackoverflow.com/questions/17238759/angular-module-minification-bug
+    //              Even switching to ngAnnotate didn't fix the "undefined aProvider" issue. Thus we are forced
+    //              to keep this option on.
+    uglify: {
+      options: { 
+        mangle: false
+      }
+    },
+
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: ['<%= yeoman.dist %>/**/*.html'], // CarmineM74 - tweaked to include html files in subdirectories
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
@@ -294,6 +351,12 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= yeoman.dist %>/images'
+        },
+        {
+          expand: true,
+          cwd: '<%= yeoman.app %>/img',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
         }]
       }
     },
@@ -327,11 +390,9 @@ module.exports = function (grunt) {
       }
     },
 
-    // ngmin tries to make the code safe for minification automatically by
-    // using the Angular long form for dependency injection. It doesn't work on
-    // things like resolve or inject so those have to be done manually.
-    ngmin: {
-      dist: {
+    // CarmineM74 - ngAnnotate replaces ngmin which is deprecated.
+    ngAnnotate: {
+      app: {
         files: [{
           expand: true,
           cwd: '.tmp/concat/scripts',
@@ -381,6 +442,51 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      // CarmineM74 - Customizations to import SmartAdmin features
+      //              Js scripts are copied under app/scripts otherwise we ran
+      //              into troubles with concatenation and later minification
+      smartadmin: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: './smartadmin',
+          dest: '<%= yeoman.app %>/scripts',
+          src: [
+            'js/**/*',
+            '!js/demo.js',
+            '!js/langs{,*/}*',
+            '!js/libs/{,**/}*', // Skipped because we manage angular dependency via bower
+            '!js/ng/{,**/}*' // Skipped because it has been modified and moved to sa_directives.js 
+          ]
+        }]
+      },
+      // CarmineM74 - These are untouched assets from SmartAdmin that are needed and copied
+      //              directly into dist folder.
+      smartadminDist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: './smartadmin',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            'img/**/*',
+            'css/{,*/}*.css',
+            'sound/{,*/}*',
+            'fonts/*'
+          ]
+        },
+        // CarmineM75 - Language translations have been customized and thus moved 
+        //              into app folder. They need to be copied into dist folder.
+        {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>/js',
+          src: [
+            'langs{,*/}*'
+          ]
+        }]
       }
     },
 
@@ -422,6 +528,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies',
       'connect:livereload',
       'watch'
     ]);
@@ -442,13 +549,16 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'clean:smartadmin',
+    'copy:smartadmin',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'ngmin',
+    'ngAnnotate', // CarmineM74 - Replaces ngmin
     'copy:dist',
+    'copy:smartadminDist',
     'cdnify',
     'cssmin',
     'uglify',
