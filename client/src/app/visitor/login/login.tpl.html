@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="col-xs-8 col-sm-8 col-md-5 col-lg-4">
+    <div class="well no-padding">
+      <form id="login-form" class="smart-form client-form" ng-submit="ctrl.submitLogin()">
+        <header>
+          Sign In
+        </header>
+
+        <fieldset>
+          
+          <section>
+            <label class="label">E-mail</label>
+            <label class="input"> <i class="icon-append fa fa-user"></i>
+              <input type="email" name="login.email" ng-model="ctrl.login.email">
+              <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b></label>
+          </section>
+
+          <section>
+            <label class="label">Password</label>
+            <label class="input"> <i class="icon-append fa fa-lock"></i>
+              <input type="password" name="login.password" ng-model="ctrl.login.password">
+              <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
+          </section>
+
+        </fieldset>
+        <footer>
+          <button type="submit" class="btn btn-primary">
+            Sign in
+          </button>
+        </footer>
+      </form>
+    </div>
+  </div>
+</div>

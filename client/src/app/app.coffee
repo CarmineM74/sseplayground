@@ -10,6 +10,8 @@ angular
     'ngTouch',
     'ui.router',
     'ng-token-auth',
+    'templates-app',
+    'templates-common',
     'saStudyApp.visitor'
   ])
   .factory('settings', ($rootScope) ->

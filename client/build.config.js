@@ -62,10 +62,20 @@ module.exports = {
    */
   vendor_files: {
     js: [
+      'vendor/jquery/dist/jquery.js',
+      'vendor/jquery-ui/ui/jquery-ui.js',
+      'vendor/json3/lib/json3.js',
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
+      'vendor/angular-resource/angular-resource.js',
+      'vendor/angular-cookies/angular-cookies.js',
+      'vendor/angular-sanitize/angular-sanitize.js',
+      'vendor/angular-animate/angular-animate.js',
+      'vendor/angular-touch/angular-touch.js',
+      'vendor/ng-token-auth/dist/ng-token-auth.js',
+      'vendor/angularjs-rails-resource/angularjs-rails-resource.js',
       'vendor/angular-ui-utils/modules/route/route.js'
     ],
     css: [
