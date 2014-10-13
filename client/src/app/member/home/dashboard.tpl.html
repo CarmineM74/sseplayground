@@ -1,0 +1,32 @@
+<div class="row" ng-controller='MainCtrl as ctrl'>
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+    <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>> <span data-localize="My Dashboard">My Dashboard</span></span></h1>
+	</div>
+	<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+		<ul id="sparks" class="" ng-if="ctrl.dati_pronti">
+			<li class="sparks-info">
+				<h5> Pedane stoccate <span class="txt-color-blue">7.171</span></h5>
+				<div class="txt-color-greenDark hidden-mobile hidden-md hidden-sm"
+          my-sparkline 
+          graph-type="bar"
+          bar-color="red"
+          height="26px"
+          ng-model="ctrl.pedane_stoccate"></div>
+			</li>
+			<li class="sparks-info">
+				<h5> Entrate <span class="txt-color-blue">71</span></h5>
+				<div class="txt-color-greenDark hidden-mobile hidden-md hidden-sm"
+          my-sparkline 
+          graph-type="bar"
+          height="26px"
+          ng-model="ctrl.ultime_entrate"></div>
+			</li>
+      <li class="">
+        <div my-easy-pie data-pie-size="40" ng-model="ctrl.carico" bar-color-cb="ctrl.carico_color(value)">
+          <span class="percent percent-sign">{{ctrl.carico}}</span>
+        </div>
+      </li>
+		</ul>
+	</div>
+</div>
+

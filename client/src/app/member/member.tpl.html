@@ -1,0 +1,31 @@
+<header id="header" data-ng-include="'member/header.tpl.html'"></header>
+
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel"><span data-ng-include="'member/left-panel.tpl.html'"></span></aside>
+<!-- END NAVIGATION -->
+
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+  <!-- RIBBON -->
+  <div id="ribbon" data-ng-include="'member/ribbon.tpl.html'" data-ribbon=""></div>
+  <!-- END RIBBON -->
+
+  <!-- MAIN CONTENT -->
+  <div id="content" ui-view class="view-animate"></div>
+  <!-- END MAIN CONTENT -->
+
+</div>
+<!-- END MAIN PANEL -->
+
+<!-- PAGE FOOTER -->
+<div class="page-footer"><span data-ng-include="'member/footer.tpl.html'"></span></div>
+<!-- END FOOTER -->
+
+<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+Note: These tiles are completely responsive,
+you can add as many as you like
+-->
+<div id="shortcut"><span data-ng-include="'member/shortcut.tpl.html'"></span></div>
+<!-- END SHORTCUT AREA -->

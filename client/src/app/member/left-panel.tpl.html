@@ -1,0 +1,33 @@
+<!-- User info -->
+			<div class="login-info">
+				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
+					
+					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						<span data-localize="john.doe">
+							john.doe 
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a> 
+
+          <session-time-left class='pull-right session-time-left' 
+            color='red' 
+            size='35' 
+            session-duration='60' 
+            refresh-interval='10'></session-time-left>
+
+				</span>
+			</div>
+			<!-- end user info -->
+
+			<!-- NAVIGATION : This navigation is also responsive
+
+			To make this navigation dynamic please make sure to link the node
+			(the reference to the nav > ul) after page load. Or the navigation
+			will not initialize.
+			-->
+
+			<navigation>
+				<nav:item data-view="/" data-icon="fa fa-lg fa-fw fa-home" title="Dashboard" />
+			</navigation>
+			<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>

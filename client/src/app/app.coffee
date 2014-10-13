@@ -12,7 +12,9 @@ angular
     'ng-token-auth',
     'templates-app',
     'templates-common',
-    'saStudyApp.visitor'
+    'app.main',
+    'saStudyApp.visitor',
+    'saStudyApp.member'
   ])
   .factory('settings', ($rootScope) ->
     settings = {
