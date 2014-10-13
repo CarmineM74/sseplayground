@@ -9,6 +9,8 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -91,6 +93,68 @@ module.exports = function ( grunt ) {
       '<%= build_dir %>', 
       '<%= compile_dir %>'
     ],
+
+    // The actual grunt server settings
+    connect: {
+      options: {
+        port: 9000,
+        // Change this to '0.0.0.0' to access the server from outside.
+        hostname: '0.0.0.0',
+        livereload: 35729
+      },
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 3000
+      }],
+      livereload: {
+        options: {
+          open: true,
+          middleware: function (connect,opts) {
+            if (!Array.isArray(opts.base)) {
+              opts.base = [opts.base];
+            }
+            var middlewares = [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
+              connect.static('.tmp'),
+              connect().use(
+                  '/bower_components',
+                  connect.static('./bower_components')
+                  ),
+              connect.static(userConfig.build_dir)
+            ];
+
+            // Make directory browse-able
+            var directory = opts.directory || opts.base[opts.base.length - 1];
+            middlewares.push(connect.directory(directory));
+
+            return middlewares;
+          }
+        }
+      },
+      test: {
+        options: {
+          port: 9001,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect.static('test'),
+              connect().use(
+                '/bower_components',
+                connect.static('./bower_components')
+              ),
+              connect.static(appConfig.app)
+            ];
+          }
+        }
+      },
+      dist: {
+        options: {
+          open: true,
+          base: '<%= build_dir %>'
+        }
+      }
+    },
 
     /**
      * The `copy` task just copies files from A to B. We use it here to copy
@@ -582,6 +646,19 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'compile', [
     'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
+
+  /**
+   * The `serve` task starts a web server on localhost through which
+   * the app can be used
+   */
+  grunt.registerTask( 'serve', 'Compile then start a connect web server', function(target) {
+    grunt.task.run([
+        'build',
+        'configureProxies',
+        'connect:livereload',
+        'watch'
+    ]);
+  });
 
   /**
    * A utility function to get all app JavaScript sources.
