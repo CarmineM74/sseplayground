@@ -4,7 +4,9 @@ angular
   .module('saStudyApp.member',[
     'ui.router',
     'saStudyApp.controllers.language',
-    'saStudyApp.services.authorization'
+    'saStudyApp.services.authorization',
+    'saStudyApp.directives.logout',
+    'saStudyApp.member.home'
   ])
   .config(($stateProvider) ->
     $stateProvider
@@ -20,6 +22,7 @@ angular
       .state('member.home',{
         url: '/dashboard'
         templateUrl: 'member/home/dashboard.tpl.html'
+        controller: 'DashboardController as ctrl'
       })
   )
 

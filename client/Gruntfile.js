@@ -173,7 +173,9 @@ module.exports = function ( grunt ) {
           cwd: 'vendor/smartadmin',
           dest: '<%= build_dir %>',
           src: [
-            'img/**/*'
+            'img/**/*',
+            'js/langs/*',
+            'sound/*'
           ]
         }]
       },

@@ -76,7 +76,10 @@ module.exports = {
       'vendor/angular-touch/angular-touch.js',
       'vendor/ng-token-auth/dist/ng-token-auth.js',
       'vendor/angularjs-rails-resource/angularjs-rails-resource.js',
-      'vendor/angular-ui-utils/modules/route/route.js'
+      'vendor/angular-ui-utils/modules/route/route.js',
+      'vendor/smartadmin/js/app.config.js',
+      'vendor/smartadmin/js/app.js',
+      'vendor/smartadmin/js/notification/SmartNotification.min.js'
     ],
     css: [
     ],

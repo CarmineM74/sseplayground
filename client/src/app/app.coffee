@@ -13,6 +13,10 @@ angular
     'templates-app',
     'templates-common',
     'app.main',
+    'app.localize',
+    'app.navigation',
+    'app.activity',
+    'app.smartui',
     'saStudyApp.visitor',
     'saStudyApp.member'
   ])
