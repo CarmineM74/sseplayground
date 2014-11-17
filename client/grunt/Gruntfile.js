@@ -5,6 +5,7 @@ var pkg = require('./package.json');
 var pub = pkg.smartadmin.public;
 var tmp = pkg.smartadmin.temp;
 var bld = pkg.smartadmin.build;
+var rails = pkg.smartadmin.rails;
 
 module.exports = function (grunt) {
 
@@ -116,6 +117,19 @@ module.exports = function (grunt) {
                 src: [
                     tmp
                 ]
+            },
+            rails: {
+                options: { force: true },
+                src: [
+                  rails + 'index.html',
+                  rails + 'build/',
+                  rails + 'sound/',
+                  rails + 'vendor/',
+                  rails + 'api/',
+                  rails + 'styles/',
+                  rails + 'plugin/',
+                  rails + 'smartadmin-plugin/'
+                ]
             }
         },
         copy: {
@@ -136,6 +150,21 @@ module.exports = function (grunt) {
                     '!**/*.tpl.html'
                 ],
                 dest: bld
+            },
+            rails: {
+                expand: true,
+                cwd: pub,
+                src: [
+                  'index.html',
+                  'build/**/*',
+                  'sound/**/*',
+                  'vendor/**/*',
+                  'api/**/*',
+                  'styles/**/*',
+                  'plugin/**/*',
+                  'smartadmin-plugin/**/*'
+                ],
+                dest: rails
             }
         },
         requirejs: {
@@ -176,6 +205,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [
         'clean:pre',
+        'clean:rails',                    // CarmineM74
         'copy:pre',
         'turnOffPotatoDeclaration',
         'ngAnnotate:tmp',
@@ -186,7 +216,8 @@ module.exports = function (grunt) {
         'uglify',
         'requirejs',
         'copy:post',
-        'clean:post'
+        'clean:post',
+        'copy:rails'                      // CarmineM74
     ]);
 
     grunt.registerTask('vtp', [

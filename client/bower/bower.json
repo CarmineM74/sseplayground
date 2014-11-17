@@ -6,7 +6,7 @@
     "angular": "~1.2.25",
     "json3": "~3.3.1",
     "es5-shim": "~3.1.0",
-    "bootstrap": "~3.3.0",
+    "bootstrap": "~3.3.1",
     "angular-resource": "~1.2.0",
     "angular-cookies": "~1.2.0",
     "angular-sanitize": "~1.2.25",
@@ -69,6 +69,6 @@
   "resolutions": {
     "jquery": "~2.0.3",
     "moment": "~2.8.3",
-    "bootstrap": "3.3.0"
+    "bootstrap": "~3.3.0"
   }
 }

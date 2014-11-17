@@ -16,3 +16,11 @@
 /tmp
 .DS_Store
 /*/.DS_Store
+/public/api/*
+/public/build/*
+/public/index.html
+/public/plugin/*
+/public/smartadmin-plugin/*
+/public/sound/*
+/public/styles/*
+/public/vendor/*

@@ -5,7 +5,8 @@
     "plugin": "../public/plugin/",
     "vendor": "../public/vendor/",
     "temp": "../public/tmp/",
-    "build": "../public/build/"
+    "build": "../public/build/",
+    "rails": "../../public/"
   },
   "version": "0.0.1",
   "description": "Smartadmin grunt tools",
