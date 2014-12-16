@@ -29,19 +29,7 @@ define([
         // App
         'app.auth',
         'app.layout',
-        'app.chat',
-        'app.dashboard',
-        'app.calendar',
-        'app.inbox',
-        'app.graphs',
-        'app.tables',
-        'app.forms',
-        'app.ui',
-        'app.widgets',
-        'app.maps',
-        'app.appViews',
-        'app.misc',
-        'app.smartAdmin'
+        'app.dashboard'
     ]);
 
     couchPotato.configureApp(app);
