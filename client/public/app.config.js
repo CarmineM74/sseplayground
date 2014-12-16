@@ -69,7 +69,7 @@ appConfig.debugStyle_success = 'background-color:green; font-weight:bold; color:
 appConfig.debugStyle_error = 'background-color:#ed1c24; font-weight:bold; color:#fff;';
 
 
-appConfig.voice_command = true;
+appConfig.voice_command = false;
 appConfig.voice_command_auto = false;
 
 /*
