@@ -4,19 +4,7 @@
     <!-- PLACE YOUR LOGO HERE -->
     <span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"> </span>
     <!-- END LOGO PLACEHOLDER -->
-
-    <!-- Note: The activity badge color changes when clicked and resets the number to 0
-    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-    <span id="activity" class="activity-dropdown" activities-dropdown-toggle> 
-        <i class="fa fa-user"></i> 
-        <b class="badge bg-color-red">21</b> 
-    </span>
-    <div smart-include="app/components/activities/activities.html"></div>
 </div>
-
-
-<recent-projects></recent-projects>
-
 
 
 <!-- pulled right: nav area -->
@@ -30,40 +18,6 @@
     <!-- end collapse menu -->
 
     <!-- #MOBILE -->
-    <!-- Top menu profile link : this shows only when top menu is active -->
-    <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-        <li class="">
-            <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                <img src="styles/img/avatars/sunny.png" alt="John Doe" class="online"/>
-            </a>
-            <ul class="dropdown-menu pull-right">
-                <li>
-                    <a href-void class="padding-10 padding-top-0 padding-bottom-0"><i
-                            class="fa fa-cog"></i> Setting</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a ui-sref="app.appViews.profileDemo" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-user"></i>
-                        <u>P</u>rofile</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href-void class="padding-10 padding-top-0 padding-bottom-0"
-                       data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href-void class="padding-10 padding-top-0 padding-bottom-0"
-                       data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#/login" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i
-                            class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
-                </li>
-            </ul>
-        </li>
-    </ul>
 
     <!-- logout button -->
     <div id="logout" class="btn-header transparent pull-right">
