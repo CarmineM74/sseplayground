@@ -12,7 +12,6 @@ define([
     'layout/actions/resetWidgets',
     'layout/actions/resetWidgets',
     'layout/actions/searchMobile',
-    'layout/directives/demo/demoStates',
     'layout/directives/smartInclude',
     'layout/directives/smartDeviceDetect',
     'layout/directives/smartFastClick',
