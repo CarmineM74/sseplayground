@@ -27,13 +27,9 @@ define([
     'layout/directives/smartPageTitle',
     'layout/directives/hrefVoid',
     'layout/service/SmartCss',
-    'modules/widgets/directives/widgetGrid',
-    'modules/widgets/directives/jarvisWidget',
-
 
     // dashboard
     'dashboard/module',
-
 
     //components
     'components/language/Language',

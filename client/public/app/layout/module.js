@@ -21,11 +21,7 @@ define(['angular',
                         templateUrl: 'app/layout/layout.tpl.html',
                         resolve: {
                             deps: $couchPotatoProvider.resolveDependencies([
-                                'auth/directives/loginInfo',
-                                'modules/graphs/directives/inline/sparklineContainer',
-                                'components/inbox/directives/unreadMessagesCount',
-                                'components/chat/api/ChatApi',
-                                'components/chat/directives/asideChatWidget'
+                                'auth/directives/loginInfo'
                             ])
                         }
                     }

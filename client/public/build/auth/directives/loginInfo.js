@@ -1,1 +1,16 @@
-define(["auth/module"],function(a){"use strict";return a.registerDirective("loginInfo",["User",function(a){return{restrict:"A",templateUrl:"build/auth/directives/login-info.tpl.html",link:function(b){a.initialized.then(function(){b.user=a})}}}])});
+define(['auth/module'], function(module){
+    "use strict";
+
+    return module.registerDirective('loginInfo', ["User", function(User){
+
+        return {
+            restrict: 'A',
+            templateUrl: 'build/auth/directives/login-info.tpl.html',
+            link: function(scope, element){
+                User.initialized.then(function(){
+                    scope.user = User
+                });
+            }
+        }
+    }])
+});

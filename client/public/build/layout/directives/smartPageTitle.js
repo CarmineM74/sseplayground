@@ -1,1 +1,26 @@
-define(["layout/module"],function(a){"use strict";a.registerDirective("smartPageTitle",["$rootScope","$timeout",function(a,b){return{restrict:"A",compile:function(c,d){c.removeAttr("smart-page-title data-smart-page-title");var e=d.smartPageTitle,f=function(a,c){var d=e;c.data&&c.data.title&&(d=c.data.title+" | "+d),b(function(){$("html head title").text(d)})};a.$on("$stateChangeStart",f)}}}])});
+define(['layout/module'], function (module) {
+
+    'use strict';
+
+    module.registerDirective('smartPageTitle', ["$rootScope", "$timeout", function ($rootScope, $timeout) {
+        return {
+            restrict: 'A',
+            compile: function (element, attributes) {
+                element.removeAttr('smart-page-title data-smart-page-title');
+
+                var defaultTitle = attributes.smartPageTitle;
+                var listener = function(event, toState, toParams, fromState, fromParams) {
+                    var title = defaultTitle;
+                    if (toState.data && toState.data.title) title = toState.data.title + ' | ' + title;
+                    // Set asynchronously so page changes before title does
+                    $timeout(function() {
+                        $('html head title').text(title);
+                    });
+                };
+
+                $rootScope.$on('$stateChangeStart', listener);
+
+            }
+        }
+    }]);
+});

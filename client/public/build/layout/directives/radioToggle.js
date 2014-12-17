@@ -1,1 +1,25 @@
-define(["layout/module"],function(a){"use strict";a.registerDirective("radioToggle",["$log",function(){return{scope:{model:"=ngModel",value:"@value"},link:function(a,b){b.parent().on("click",function(){a.model=a.value,a.$apply()})}}}])});
+define(['layout/module'], function (module) {
+
+    'use strict';
+
+    /*
+    * Directive for toggling a ng-model with a button
+    * Source: https://gist.github.com/aeife/9374784
+    */
+
+    module.registerDirective('radioToggle', ["$log", function ($log) {
+      return {
+        scope: {
+          model: "=ngModel",
+          value: "@value"
+        },
+        link: function(scope, element, attrs) {
+
+          element.parent().on('click', function() {
+            scope.model = scope.value;
+            scope.$apply();
+          });
+        }
+      }
+    }]);
+});

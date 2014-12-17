@@ -21,13 +21,7 @@ define([
                         templateUrl: 'app/dashboard/dashboard.html',
                         resolve: {
                             deps: $couchPotatoProvider.resolveDependencies([
-                                'dashboard/DashboardCtrl',
-                                'modules/graphs/directives/inline/sparklineContainer',
-                                'modules/graphs/directives/inline/easyPieChartContainer',
-                                'components/chat/directives/chatWidget',
-                                'components/chat/directives/chatUsers',
-                                'modules/graphs/directives/vectormap/vectorMap',
-                                'modules/graphs/directives/flot/flotBasic'
+                                'dashboard/DashboardCtrl'
                             ])
                         }
                     }

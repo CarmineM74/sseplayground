@@ -213,7 +213,7 @@ module.exports = function (grunt) {
         'adjustTemplateUrls',
         'html2js',
         'addIncludes',
-        'uglify',
+        //'uglify',
         'requirejs',
         'copy:post',
         'clean:post',

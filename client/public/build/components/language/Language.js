@@ -1,1 +1,46 @@
-define(["app"],function(a){"use strict";return a.factory("Language",["$http",function(a){function b(b,c){a.get("api/langs/"+b+".json").success(function(a){c(a)}).error(function(){$log.log("Error"),c([])})}function c(b){a.get("api/languages.json").success(function(a){b(a)}).error(function(){$log.log("Error"),b([])})}return{getLang:function(a,c){b(a,c)},getLanguages:function(a){c(a)}}}])});
+define(['app'], function(app){
+    "use strict";
+
+    return app.factory('Language', ["$http", function($http){
+
+		function getLanguage(key, callback) {
+
+			$http.get('api/langs/' + key + '.json').success(function(data){
+
+				callback(data);
+				
+			}).error(function(){
+
+				$log.log('Error');
+				callback([]);
+
+			});
+
+		}
+
+		function getLanguages(callback) {
+
+			$http.get('api/languages.json').success(function(data){
+
+				callback(data);
+				
+			}).error(function(){
+
+				$log.log('Error');
+				callback([]);
+
+			});
+
+		}
+
+		return {
+			getLang: function(type, callback) {
+				getLanguage(type, callback);
+			},
+			getLanguages:function(callback){
+				getLanguages(callback);
+			}
+		}
+
+    }])
+})

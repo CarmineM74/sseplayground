@@ -15,7 +15,7 @@ define([
     'angular-ui-router',
     'angular-animate',
     'angular-bootstrap',
-    'smartwidgets',
+    'angular-sanitize', // http://myorange.ca/supportforum/question/how-to-completely-remove-chat-module-in-angularjs-version
     'notification'
 ], function (ng, couchPotato) {
 

@@ -1,1 +1,136 @@
-define(["angular","angular-couch-potato","angular-ui-router","angular-google-plus","angular-easyfb"],function(a,b){"use strict";var c=a.module("app.auth",["ui.router"]);b.configureApp(c);var d={googleClientId:"678402726462-ah1p6ug0klf9jm8cplefmphfupg3bg2h.apps.googleusercontent.com",facebookAppId:"620275558085318"};return c.config(["$stateProvider","$couchPotatoProvider",function(a,b){a.state("realLogin",{url:"/real-login",views:{root:{templateUrl:"build/auth/login/login.html",controller:"LoginCtrl",resolve:{deps:b.resolveDependencies(["auth/models/User","auth/directives/loginInfo","auth/login/LoginCtrl","auth/login/directives/facebookSignin","auth/login/directives/googleSignin"])}}},data:{title:"Login",rootId:"extra-page"}}).state("login",{url:"/login",views:{root:{templateUrl:"build/auth/views/login.html"}},data:{title:"Login",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("register",{url:"/register",views:{root:{templateUrl:"build/auth/views/register.html"}},data:{title:"Register",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("forgotPassword",{url:"/forgot-password",views:{root:{templateUrl:"build/auth/views/forgot-password.html"}},data:{title:"Forgot Password",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("lock",{url:"/lock",views:{root:{templateUrl:"build/auth/views/lock.html"}},data:{title:"Locked Screen",htmlId:"lock-page"}})}]).constant("authKeys",d),c.run(["$couchPotato",function(a){c.lazy=a}]),c});
+define([
+    'angular',
+    'angular-couch-potato',
+    'angular-ui-router',
+    'angular-google-plus',
+    'angular-easyfb'
+], function (ng, couchPotato) {
+
+    "use strict";
+
+    var module = ng.module('app.auth', [
+        'ui.router'
+//        ,
+//        'ezfb',
+//        'googleplus'
+    ]);
+
+    couchPotato.configureApp(module);
+
+    var authKeys = {
+        googleClientId: '678402726462-ah1p6ug0klf9jm8cplefmphfupg3bg2h.apps.googleusercontent.com',
+        facebookAppId: '620275558085318'
+    };
+
+    module.config(["$stateProvider", "$couchPotatoProvider", function ($stateProvider, $couchPotatoProvider
+//        , ezfbProvider
+//        , GooglePlusProvider
+        ) {
+//        GooglePlusProvider.init({
+//            clientId: authKeys.googleClientId
+//        });
+//
+//        ezfbProvider.setInitParams({
+//            appId: authKeys.facebookAppId
+//        });
+        $stateProvider.state('realLogin', {
+            url: '/real-login',
+
+            views: {
+                root: {
+                    templateUrl: "build/auth/login/login.html",
+                    controller: 'LoginCtrl',
+                    resolve: {
+                        deps: $couchPotatoProvider.resolveDependencies([
+                            'auth/models/User',
+                            'auth/directives/loginInfo',
+
+                            'auth/login/LoginCtrl',
+                            'auth/login/directives/facebookSignin',
+                            'auth/login/directives/googleSignin'
+                        ])
+                    }
+                }
+            },
+            data: {
+                title: 'Login',
+                rootId: 'extra-page'
+            }
+
+        })
+
+        .state('login', {
+            url: '/login',
+            views: {
+                root: {
+                    templateUrl: 'build/auth/views/login.html'
+                }
+            },
+            data: {
+                title: 'Login',
+                htmlId: 'extr-page'
+            },
+            resolve: {
+                deps: $couchPotatoProvider.resolveDependencies([
+                    'modules/forms/directives/validate/smartValidateForm'
+                ])
+            }
+        })
+
+        .state('register', {
+            url: '/register',
+            views: {
+                root: {
+                    templateUrl: 'build/auth/views/register.html'
+                }
+            },
+            data: {
+                title: 'Register',
+                htmlId: 'extr-page'
+            },
+            resolve: {
+                deps: $couchPotatoProvider.resolveDependencies([
+                    'modules/forms/directives/validate/smartValidateForm'
+                ])
+            }
+        })
+
+        .state('forgotPassword', {
+            url: '/forgot-password',
+            views: {
+                root: {
+                    templateUrl: 'build/auth/views/forgot-password.html'
+                }
+            },
+            data: {
+                title: 'Forgot Password',
+                htmlId: 'extr-page'
+            },
+            resolve: {
+                deps: $couchPotatoProvider.resolveDependencies([
+                    'modules/forms/directives/validate/smartValidateForm'
+                ])
+            }
+        })
+
+        .state('lock', {
+            url: '/lock',
+            views: {
+                root: {
+                    templateUrl: 'build/auth/views/lock.html'
+                }
+            },
+            data: {
+                title: 'Locked Screen',
+                htmlId: 'lock-page'
+            }
+        })
+
+
+    }]).constant('authKeys', authKeys);
+
+    module.run(["$couchPotato", function($couchPotato){
+        module.lazy = $couchPotato;
+    }]);
+    return module;
+});

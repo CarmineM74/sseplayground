@@ -1,1 +1,23 @@
-define(["auth/module"],function(a){"use strict";return a.registerDirective("googleSignin",["$rootScope","GooglePlus",function(a,b){return{restrict:"E",template:'<a class="g-signin btn btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i> Sign in with Google</a>',replace:!0,link:function(c,d){d.on("click",function(){b.login().then(function(b){a.$broadcast("event:google-plus-signin-success",b)},function(b){a.$broadcast("event:google-plus-signin-failure",b)})})}}}])});
+define(['auth/module'], function (module) {
+
+    "use strict";
+
+    return module.registerDirective('googleSignin', ["$rootScope", "GooglePlus", function ($rootScope, GooglePlus) {
+        return {
+            restrict: 'E',
+            template: '<a class="g-signin btn btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i> Sign in with Google</a>',
+            replace: true,
+            link: function (scope, element) {
+                element.on('click', function(){
+                    GooglePlus.login().then(function (authResult) {
+                        $rootScope.$broadcast('event:google-plus-signin-success', authResult);
+
+                    }, function (err) {
+                        $rootScope.$broadcast('event:google-plus-signin-failure', err);
+
+                    });
+                })
+            }
+        };
+    }]);
+});
