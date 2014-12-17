@@ -22,6 +22,25 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        /**
+         * `grunt coffee` compiles the CoffeeScript sources. To work well with the
+         * rest of the build, we have a separate compilation task for sources and
+         * specs so they can go to different places. For example, we need the
+         * sources to live with the rest of the copied JavaScript so we can include
+         * it in the final build, but we don't want to include our specs there.
+         */
+        coffee: {
+          source: {
+            options: {
+              bare: true
+            },
+            expand: true,
+            cwd: '.',
+            src: [ pub +  '/app/**/*.coffee', '!' + pub + '/app/**/*.spec.coffee' ],
+            dest: tmp,
+            ext: '.js'
+          }
+        },
         ngAnnotate: {
             tmp: {
                 expand: true,
@@ -198,6 +217,8 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
+    grunt.loadNpmTasks('grunt-contrib-coffee');       // CarmineM74
+
     grunt.loadNpmTasks('grunt-html2js');
 
     grunt.loadTasks('tasks');
@@ -213,7 +234,8 @@ module.exports = function (grunt) {
         'adjustTemplateUrls',
         'html2js',
         'addIncludes',
-        //'uglify',
+        'coffee',                         // CarmineM74
+        'uglify',
         'requirejs',
         'copy:post',
         'clean:post',

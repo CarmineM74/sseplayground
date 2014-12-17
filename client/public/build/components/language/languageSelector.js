@@ -1,12 +1,1 @@
-define(['app'], function(module){
-    "use strict";
-
-    module.registerDirective('languageSelector', ["Language", function(Language){
-        return {
-            restrict: "EA",
-            replace: true,
-            templateUrl: "build/components/language/language-selector.tpl.html",
-            scope: true,
-        }
-    }])
-});
+define(["app"],function(a){"use strict";a.registerDirective("languageSelector",["Language",function(){return{restrict:"EA",replace:!0,templateUrl:"build/components/language/language-selector.tpl.html",scope:!0}}])});
