@@ -1,5 +1,5 @@
 [
- "/jquery/dist/jquery.min.js",
+ "/jquery/jquery.min.js",
  "/jquery-ui/jquery-ui.min.js",
  "/bootstrap/dist/js/bootstrap.min.js",
  "/angular/angular.min.js",
@@ -16,6 +16,7 @@
   "/angular-google-maps/dist/angular-google-maps.min.js",
   "/angular-bootstrap/ui-bootstrap-tpls.min.js",
   "/angular-couch-potato/dist/angular-couch-potato.js",
+  "/oclazyload/dist/ocLazyLoad.min.js",
   "/angular-easyfb/angular-easyfb.min.js",
   "/angular-google-plus/dist/angular-google-plus.min.js",
   "/fastclick/lib/fastclick.js",
