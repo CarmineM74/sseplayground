@@ -1,1 +1,21 @@
-define(["layout/module"],function(a){"use strict";a.registerDirective("reloadState",["$rootScope",function(a){return{restrict:"A",compile:function(b){b.removeAttr("reload-state data-reload-state"),b.on("click",function(b){a.$state.transitionTo(a.$state.current,a.$stateParams,{reload:!0,inherit:!1,notify:!0}),b.preventDefault()})}}}])});
+define(['layout/module'], function (module) {
+
+    'use strict';
+
+    module.registerDirective('reloadState', ["$rootScope", function ($rootScope) {
+        return {
+            restrict: 'A',
+            compile: function (tElement, tAttributes) {
+                tElement.removeAttr('reload-state data-reload-state');
+                tElement.on('click', function (e) {
+                    $rootScope.$state.transitionTo($rootScope.$state.current, $rootScope.$stateParams, {
+                        reload: true,
+                        inherit: false,
+                        notify: true
+                    });
+                    e.preventDefault();
+                })
+            }
+        }
+    }]);
+});

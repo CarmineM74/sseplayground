@@ -25,7 +25,7 @@ var require = {
 
         'angular-bootstrap': '../plugin/angular-bootstrap/ui-bootstrap-tpls.min',
 
-        'angular-couch-potato': '../plugin/angular-couch-potato/dist/angular-couch-potato',
+        'ocLazyLoad': '../plugin/oclazyload/dist/ocLazyLoad',
 
         'angular-easyfb': '../plugin/angular-easyfb/angular-easyfb.min',
         'angular-google-plus': '../plugin/angular-google-plus/dist/angular-google-plus.min',
@@ -140,7 +140,7 @@ var require = {
         'angular-ui-router': { deps: ['angular'] },
         'angular-google-maps': { deps: ['angular'] },
 
-        'angular-couch-potato': { deps: ['angular'] },
+        'ocLazyLoad': { deps: ['angular'] },
 
         'socket.io': { deps: ['angular'] },
 

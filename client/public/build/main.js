@@ -1,298 +1,1110 @@
-
-
-
-
-var appConfig = {};
-
-appConfig.menu_speed = 200;
-
-
-appConfig.smartSkin = "smart-style-0";
-
-appConfig.skins = [
-    {name: "smart-style-0",
-        logo: "styles/img/logo.png",
-        class: "btn btn-block btn-xs txt-color-white margin-right-5",
-        style: "background-color:#4E463F;",
-        label: "Smart Default"},
-
-    {name: "smart-style-1",
-        logo: "styles/img/logo-white.png",
-        class: "btn btn-block btn-xs txt-color-white",
-        style: "background:#3A4558;",
-        label: "Dark Elegance"},
-
-    {name: "smart-style-2",
-        logo: "styles/img/logo-blue.png",
-        class: "btn btn-xs btn-block txt-color-darken margin-top-5",
-        style: "background:#fff;",
-        label: "Ultra Light"},
-
-    {name: "smart-style-3",
-        logo: "styles/img/logo-pale.png",
-        class: "btn btn-xs btn-block txt-color-white margin-top-5",
-        style: "background:#f78c40",
-        label: "Google Skin"},
-
-    {name: "smart-style-4",
-        logo: "styles/img/logo-pale.png",
-        class: "btn btn-xs btn-block txt-color-white margin-top-5",
-        style: "background: #bbc0cf; border: 1px solid #59779E; color: #17273D !important;",
-        label: "PixelSmash"},
-
-    {name: "smart-style-5",
-        logo: "styles/img/logo-pale.png",
-        class: "btn btn-xs btn-block txt-color-white margin-top-5",
-        style: "background: rgba(153, 179, 204, 0.2); border: 1px solid rgba(121, 161, 221, 0.8); color: #17273D !important;",
-        label: "Glass"}
-];
-
-
-
-appConfig.sound_path = "sound/";
-appConfig.sound_on = true; 
-
-
-/*
-* DEBUGGING MODE
-* debugState = true; will spit all debuging message inside browser console.
-* The colors are best displayed in chrome browser.
-*/
-
-
-appConfig.debugState = false;	
-appConfig.debugStyle = 'font-weight: bold; color: #00f;';
-appConfig.debugStyle_green = 'font-weight: bold; font-style:italic; color: #46C246;';
-appConfig.debugStyle_red = 'font-weight: bold; color: #ed1c24;';
-appConfig.debugStyle_warning = 'background-color:yellow';
-appConfig.debugStyle_success = 'background-color:green; font-weight:bold; color:#fff;';
-appConfig.debugStyle_error = 'background-color:#ed1c24; font-weight:bold; color:#fff;';
-
-
-appConfig.voice_command = false;
-appConfig.voice_command_auto = false;
-
-/*
- *  Sets the language to the default 'en-US'. (supports over 50 languages 
- *  by google)
- * 
- *  Afrikaans         ['af-ZA']
- *  Bahasa Indonesia  ['id-ID']
- *  Bahasa Melayu     ['ms-MY']
- *  CatalГ            ['ca-ES']
- *  ДЊeЕЎtina         ['cs-CZ']
- *  Deutsch           ['de-DE']
- *  English           ['en-AU', 'Australia']
- *                    ['en-CA', 'Canada']
- *                    ['en-IN', 'India']
- *                    ['en-NZ', 'New Zealand']
- *                    ['en-ZA', 'South Africa']
- *                    ['en-GB', 'United Kingdom']
- *                    ['en-US', 'United States']
- *  EspaГ±ol          ['es-AR', 'Argentina']
- *                    ['es-BO', 'Bolivia']
- *                    ['es-CL', 'Chile']
- *                    ['es-CO', 'Colombia']
- *                    ['es-CR', 'Costa Rica']
- *                    ['es-EC', 'Ecuador']
- *                    ['es-SV', 'El Salvador']
- *                    ['es-ES', 'EspaГ±a']
- *                    ['es-US', 'Estados Unidos']
- *                    ['es-GT', 'Guatemala']
- *                    ['es-HN', 'Honduras']
- *                    ['es-MX', 'MГ©xico']
- *                    ['es-NI', 'Nicaragua']
- *                    ['es-PA', 'PanamГЎ']
- *                    ['es-PY', 'Paraguay']
- *                    ['es-PE', 'PerГє']
- *                    ['es-PR', 'Puerto Rico']
- *                    ['es-DO', 'RepГєblica Dominicana']
- *                    ['es-UY', 'Uruguay']
- *                    ['es-VE', 'Venezuela']
- *  Euskara           ['eu-ES']
- *  FranГ§ais         ['fr-FR']
- *  Galego            ['gl-ES']
- *  Hrvatski          ['hr_HR']
- *  IsiZulu           ['zu-ZA']
- *  ГЌslenska         ['is-IS']
- *  Italiano          ['it-IT', 'Italia']
- *                    ['it-CH', 'Svizzera']
- *  Magyar            ['hu-HU']
- *  Nederlands        ['nl-NL']
- *  Norsk bokmГҐl     ['nb-NO']
- *  Polski            ['pl-PL']
- *  PortuguГЄs        ['pt-BR', 'Brasil']
- *                    ['pt-PT', 'Portugal']
- *  RomГўnДѓ          ['ro-RO']
- *  SlovenДЌina       ['sk-SK']
- *  Suomi             ['fi-FI']
- *  Svenska           ['sv-SE']
- *  TГјrkГ§e          ['tr-TR']
- *  Р±СЉР»РіР°СЂСЃРєРё['bg-BG']
- *  PСѓСЃСЃРєРёР№     ['ru-RU']
- *  РЎСЂРїСЃРєРё      ['sr-RS']
- *  н•њкµ­м–ґ         ['ko-KR']
- *  дё­ж–‡            ['cmn-Hans-CN', 'ж™®йЂљиЇќ (дё­е›Ѕе¤§й™†)']
- *                    ['cmn-Hans-HK', 'ж™®йЂљиЇќ (й¦™жёЇ)']
- *                    ['cmn-Hant-TW', 'дё­ж–‡ (еЏ°зЃЈ)']
- *                    ['yue-Hant-HK', 'зІµиЄћ (й¦™жёЇ)']
- *  ж—Ґжњ¬иЄћ         ['ja-JP']
- *  Lingua latД«na    ['la']
+/**
+ * oclazyload - Load modules on demand (lazy load) with angularJS
+ * @version v0.5.2
+ * @link https://github.com/ocombe/ocLazyLoad
+ * @license MIT
+ * @author Olivier Combe <olivier.combe@gmail.com>
  */
-appConfig.voice_command_lang = 'en-US';
-/*
- *  Use localstorage to remember on/off (best used with HTML Version)
- */ 
-appConfig.voice_localStorage = false;
-/*
- * Voice Commands
- * Defines all voice command variables and functions
- */ 
-if (appConfig.voice_command) {
-        
-     	appConfig.commands = {
-                
-        'show dashboard' : function() { window.location.hash = "dashboard" },
-        'show inbox' : function() {  window.location.hash = "inbox/" },
-        'show graphs' : function() {  window.location.hash = "graphs/flot" },
-        'show flotchart' : function() { window.location.hash = "graphs/flot" },
-        'show morris chart' : function() { window.location.hash = "graphs/morris" },
-        'show inline chart' : function() { window.location.hash = "graphs/inline-charts" },
-        'show dygraphs' : function() { window.location.hash = "graphs/dygraphs" },
-        'show tables' : function() { window.location.hash = "tables/table" },
-        'show data table' : function() { window.location.hash = "tables/datatable" },
-        'show jquery grid' : function() { window.location.hash = "tables/jqgrid" },
-        'show form' : function() { window.location.hash = "forms/form-elements" },
-        'show form layouts' : function() { window.location.hash = "forms/form-templates" },
-        'show form validation' : function() { window.location.hash = "forms/validation" },
-        'show form elements' : function() { window.location.hash = "forms/bootstrap-forms" },
-        'show form plugins' : function() { window.location.hash = "forms/plugins" },
-        'show form wizards' : function() { window.location.hash = "forms/wizards" },
-        'show bootstrap editor' : function() { window.location.hash = "forms/other-editors" },
-        'show dropzone' : function() { window.location.hash = "forms/dropzone" },
-        'show image cropping' : function() { window.location.hash = "forms/image-editor" },
-        'show general elements' : function() { window.location.hash = "ui/general-elements" },
-        'show buttons' : function() { window.location.hash = "ui/buttons" },
-        'show fontawesome' : function() { window.location.hash = "ui/icons/fa" },
-        'show glyph icons' : function() { window.location.hash = "ui/icons/glyph" },
-        'show flags' : function() { window.location.hash = "ui/icons/flags" },
-        'show grid' : function() { window.location.hash = "ui/grid" },
-        'show tree view' : function() { window.location.hash = "ui/treeview" },
-        'show nestable lists' : function() { window.location.hash = "ui/nestable-list" },
-        'show jquery U I' : function() { window.location.hash = "ui/jqui" },
-        'show typography' : function() { window.location.hash = "ui/typography" },
-        'show calendar' : function() { window.location.hash = "calendar" },
-        'show widgets' : function() { window.location.hash = "widgets" },
-        'show gallery' : function() { window.location.hash = "gallery" },
-        'show maps' : function() { window.location.hash = "gmap-xml" },
-        'go back' :  function() { history.back(1); }, 
-        'scroll up' : function () { $('html, body').animate({ scrollTop: 0 }, 100); },
-        'scroll down' : function () { $('html, body').animate({ scrollTop: $(document).height() }, 100);},
-        'hide navigation' : function() { 
-            if ($( ":root" ).hasClass("container") && !$( ":root" ).hasClass("menu-on-top")){
-                $('span.minifyme').trigger("click");
-            } else {
-                $('#hide-menu > span > a').trigger("click"); 
-            }
-        },
-        'show navigation' : function() { 
-            if ($( ":root" ).hasClass("container") && !$( ":root" ).hasClass("menu-on-top")){
-                $('span.minifyme').trigger("click");
-            } else {
-                $('#hide-menu > span > a').trigger("click"); 
-            }
-        },
-        'mute' : function() {
-            appConfig.sound_on = false;
-            $.smallBox({
-                title : "MUTE",
-                content : "All sounds have been muted!",
-                color : "#a90329",
-                timeout: 4000,
-                icon : "fa fa-volume-off"
-            });
-        },
-        'sound on' : function() {
-            appConfig.sound_on = true;
-            $.speechApp.playConfirmation();
-            $.smallBox({
-                title : "UNMUTE",
-                content : "All sounds have been turned on!",
-                color : "#40ac2b",
-                sound_file: 'voice_alert',
-                timeout: 5000,
-                icon : "fa fa-volume-up"
-            });
-        },
-        'stop' : function() {
-            smartSpeechRecognition.abort();
-            $( ":root" ).removeClass("voice-command-active");
-            $.smallBox({
-                title : "VOICE COMMAND OFF",
-                content : "Your voice commands has been successfully turned off. Click on the <i class='fa fa-microphone fa-lg fa-fw'></i> icon to turn it back on.",
-                color : "#40ac2b",
-                sound_file: 'voice_off',
-                timeout: 8000,
-                icon : "fa fa-microphone-slash"
-            });
-            if ($('#speech-btn .popover').is(':visible')) {
-                $('#speech-btn .popover').fadeOut(250);
-            }
-        },
-        'help' : function() {
+(function() {
+  
+  var regModules = ['ng'],
+    initModules = [],
+    regInvokes = {},
+    regConfigs = [],
+    justLoaded = [],
+    runBlocks = {},
+    ocLazyLoad = angular.module('oc.lazyLoad', ['ng']),
+    broadcast = angular.noop;
 
-            $('#voiceModal').removeData('modal').modal( { remote: "app/layout/partials/voice-commands.tpl.html", show: true } );
-            if ($('#speech-btn .popover').is(':visible')) {
-                $('#speech-btn .popover').fadeOut(250);
-            }
+  ocLazyLoad.provider('$ocLazyLoad', ['$controllerProvider', '$provide', '$compileProvider', '$filterProvider', '$injector', '$animateProvider',
+    function($controllerProvider, $provide, $compileProvider, $filterProvider, $injector, $animateProvider) {
+      var modules = {},
+        providers = {
+          $controllerProvider: $controllerProvider,
+          $compileProvider: $compileProvider,
+          $filterProvider: $filterProvider,
+          $provide: $provide, // other things
+          $injector: $injector,
+          $animateProvider: $animateProvider
+        },
+        anchor = document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0],
+        jsLoader, cssLoader, templatesLoader,
+        debug = false,
+        events = false;
 
-        },      
-        'got it' : function() {
-            $('#voiceModal').modal('hide');
-        },  
-        'logout' : function() {
-            $.speechApp.stop();
-            window.location = $('#logout > span > a').attr("href");
+      // Let's get the list of loaded modules & components
+      init(angular.element(window.document));
+
+      this.$get = ['$log', '$q', '$templateCache', '$http', '$rootElement', '$rootScope', '$cacheFactory', '$interval', function($log, $q, $templateCache, $http, $rootElement, $rootScope, $cacheFactory, $interval) {
+        var instanceInjector,
+          filesCache = $cacheFactory('ocLazyLoad'),
+          uaCssChecked = false,
+          useCssLoadPatch = false;
+
+        if(!debug) {
+          $log = {};
+          $log['error'] = angular.noop;
+          $log['warn'] = angular.noop;
+          $log['info'] = angular.noop;
         }
-    }; 
+
+        // Make this lazy because at the moment that $get() is called the instance injector hasn't been assigned to the rootElement yet
+        providers.getInstanceInjector = function() {
+          return (instanceInjector) ? instanceInjector : (instanceInjector = ($rootElement.data('$injector') || angular.injector()));
+        };
+
+        broadcast = function broadcast(eventName, params) {
+          if(events) {
+            $rootScope.$broadcast(eventName, params);
+          }
+          if(debug) {
+            $log.info(eventName, params);
+          }
+        }
+
+        /**
+         * Load a js/css file
+         * @param type
+         * @param path
+         * @returns promise
+         */
+        var buildElement = function buildElement(type, path, params) {
+          var deferred = $q.defer(),
+            el, loaded,
+            cacheBuster = function cacheBuster(url) {
+              var dc = new Date().getTime();
+              if(url.indexOf('?') >= 0) {
+                if(url.substring(0, url.length - 1) === '&') {
+                  return url + '_dc=' + dc;
+                }
+                return url + '&_dc=' + dc;
+              } else {
+                return url + '?_dc=' + dc;
+              }
+            };
+
+          // Store the promise early so the file load can be detected by other parallel lazy loads
+          // (ie: multiple routes on one page) a 'true' value isn't sufficient
+          // as it causes false positive load results.
+          if(angular.isUndefined(filesCache.get(path))) {
+            filesCache.put(path, deferred.promise);
+          }
+
+          // Switch in case more content types are added later
+          switch(type) {
+            case 'css':
+              el = document.createElement('link');
+              el.type = 'text/css';
+              el.rel = 'stylesheet';
+              el.href = params.cache === false ? cacheBuster(path) : path;
+              break;
+            case 'js':
+              el = document.createElement('script');
+              el.src = params.cache === false ? cacheBuster(path) : path;
+              break;
+            default:
+              deferred.reject(new Error('Requested type "' + type + '" is not known. Could not inject "' + path + '"'));
+              break;
+          }
+          el.onload = el['onreadystatechange'] = function(e) {
+            if((el['readyState'] && !(/^c|loade/.test(el['readyState']))) || loaded) return;
+            el.onload = el['onreadystatechange'] = null
+            loaded = 1;
+            broadcast('ocLazyLoad.fileLoaded', path);
+            deferred.resolve();
+          }
+          el.onerror = function(e) {
+            deferred.reject(new Error('Unable to load ' + path));
+          }
+          el.async = params.serie ? 0 : 1;
+
+          var insertBeforeElem = anchor.lastChild;
+          if(params.insertBefore) {
+            var element = angular.element(params.insertBefore);
+            if(element && element.length > 0) {
+              insertBeforeElem = element[0];
+            }
+          }
+          anchor.insertBefore(el, insertBeforeElem);
+
+          /*
+           The event load or readystatechange doesn't fire in:
+           - iOS < 6       (default mobile browser)
+           - Android < 4.4 (default mobile browser)
+           - Safari < 6    (desktop browser)
+           */
+          if(type == 'css') {
+            if(!uaCssChecked) {
+              var ua = navigator.userAgent.toLowerCase();
+
+              // iOS < 6
+              if(/iP(hone|od|ad)/.test(navigator.platform)) {
+                var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+                var iOSVersion = parseFloat([parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)].join('.'));
+                useCssLoadPatch = iOSVersion < 6;
+              } else if(ua.indexOf("android") > -1) { // Android < 4.4
+                var androidVersion = parseFloat(ua.slice(ua.indexOf("android") + 8));
+                useCssLoadPatch = androidVersion < 4.4;
+              } else if(ua.indexOf('safari') > -1 && ua.indexOf('chrome') == -1) {
+                var safariVersion = parseFloat(ua.match(/version\/([\.\d]+)/i)[1]);
+                useCssLoadPatch = safariVersion < 6;
+              }
+            }
+
+            if(useCssLoadPatch) {
+              var tries = 1000; // * 20 = 20000 miliseconds
+              var interval = $interval(function() {
+                try {
+                  el.sheet.cssRules;
+                  $interval.cancel(interval);
+                  el.onload();
+                } catch(e) {
+                  if(--tries <= 0) {
+                    el.onerror();
+                  }
+                }
+              }, 20);
+            }
+          }
+
+          return deferred.promise;
+        }
+
+        if(angular.isUndefined(jsLoader)) {
+          /**
+           * jsLoader function
+           * @type Function
+           * @param paths array list of js files to load
+           * @param callback to call when everything is loaded. We use a callback and not a promise
+           * @param params object config parameters
+           * because the user can overwrite jsLoader and it will probably not use promises :(
+           */
+          jsLoader = function(paths, callback, params) {
+            var promises = [];
+            angular.forEach(paths, function loading(path) {
+              promises.push(buildElement('js', path, params));
+            });
+            $q.all(promises).then(function success() {
+              callback();
+            }, function error(err) {
+              callback(err);
+            });
+          }
+          jsLoader.ocLazyLoadLoader = true;
+        }
+
+        if(angular.isUndefined(cssLoader)) {
+          /**
+           * cssLoader function
+           * @type Function
+           * @param paths array list of css files to load
+           * @param callback to call when everything is loaded. We use a callback and not a promise
+           * @param params object config parameters
+           * because the user can overwrite cssLoader and it will probably not use promises :(
+           */
+          cssLoader = function(paths, callback, params) {
+            var promises = [];
+            angular.forEach(paths, function loading(path) {
+              promises.push(buildElement('css', path, params));
+            });
+            $q.all(promises).then(function success() {
+              callback();
+            }, function error(err) {
+              callback(err);
+            });
+          }
+          cssLoader.ocLazyLoadLoader = true;
+        }
+
+        if(angular.isUndefined(templatesLoader)) {
+          /**
+           * templatesLoader function
+           * @type Function
+           * @param paths array list of css files to load
+           * @param callback to call when everything is loaded. We use a callback and not a promise
+           * @param params object config parameters for $http
+           * because the user can overwrite templatesLoader and it will probably not use promises :(
+           */
+          templatesLoader = function(paths, callback, params) {
+            var promises = [];
+            angular.forEach(paths, function(url) {
+              var deferred = $q.defer();
+              promises.push(deferred.promise);
+              $http.get(url, params).success(function(data) {
+                if(angular.isString(data) && data.length > 0) {
+                  angular.forEach(angular.element(data), function(node) {
+                    if(node.nodeName === 'SCRIPT' && node.type === 'text/ng-template') {
+                      $templateCache.put(node.id, node.innerHTML);
+                    }
+                  });
+                }
+                if(angular.isUndefined(filesCache.get(url))) {
+                  filesCache.put(url, true);
+                }
+                deferred.resolve();
+              }).error(function(err) {
+                deferred.reject(new Error('Unable to load template file "' + url + '": ' + err));
+              });
+            });
+            return $q.all(promises).then(function success() {
+              callback();
+            }, function error(err) {
+              callback(err);
+            });
+          }
+          templatesLoader.ocLazyLoadLoader = true;
+        }
+
+        var filesLoader = function(config, params) {
+          var cssFiles = [],
+            templatesFiles = [],
+            jsFiles = [],
+            promises = [],
+            cachePromise = null;
+
+          angular.extend(params || {}, config);
+
+          var pushFile = function(path) {
+            cachePromise = filesCache.get(path);
+            if(angular.isUndefined(cachePromise) || params.cache === false) {
+              if(/\.(css|less)[^\.]*$/.test(path) && cssFiles.indexOf(path) === -1) {
+                cssFiles.push(path);
+              } else if(/\.(htm|html)[^\.]*$/.test(path) && templatesFiles.indexOf(path) === -1) {
+                templatesFiles.push(path);
+              } else if(jsFiles.indexOf(path) === -1) {
+                jsFiles.push(path);
+              }
+            } else if(cachePromise) {
+              promises.push(cachePromise);
+            }
+          }
+
+          if(params.serie) {
+            pushFile(params.files.shift());
+          } else {
+            angular.forEach(params.files, function(path) {
+              pushFile(path);
+            });
+          }
+
+          if(cssFiles.length > 0) {
+            var cssDeferred = $q.defer();
+            cssLoader(cssFiles, function(err) {
+              if(angular.isDefined(err) && cssLoader.hasOwnProperty('ocLazyLoadLoader')) {
+                $log.error(err);
+                cssDeferred.reject(err);
+              } else {
+                cssDeferred.resolve();
+              }
+            }, params);
+            promises.push(cssDeferred.promise);
+          }
+
+          if(templatesFiles.length > 0) {
+            var templatesDeferred = $q.defer();
+            templatesLoader(templatesFiles, function(err) {
+              if(angular.isDefined(err) && templatesLoader.hasOwnProperty('ocLazyLoadLoader')) {
+                $log.error(err);
+                templatesDeferred.reject(err);
+              } else {
+                templatesDeferred.resolve();
+              }
+            }, params);
+            promises.push(templatesDeferred.promise);
+          }
+
+          if(jsFiles.length > 0) {
+            var jsDeferred = $q.defer();
+            jsLoader(jsFiles, function(err) {
+              if(angular.isDefined(err) && jsLoader.hasOwnProperty('ocLazyLoadLoader')) {
+                $log.error(err);
+                jsDeferred.reject(err);
+              } else {
+                jsDeferred.resolve();
+              }
+            }, params);
+            promises.push(jsDeferred.promise);
+          }
+
+          if(params.serie && params.files.length > 0) {
+            return $q.all(promises).then(function success() {
+              return filesLoader(config, params);
+            });
+          } else {
+            return $q.all(promises);
+          }
+        }
+
+        return {
+          /**
+           * Let you get a module config object
+           * @param moduleName String the name of the module
+           * @returns {*}
+           */
+          getModuleConfig: function(moduleName) {
+            if(!angular.isString(moduleName)) {
+              throw new Error('You need to give the name of the module to get');
+            }
+            if(!modules[moduleName]) {
+              return null;
+            }
+            return modules[moduleName];
+          },
+
+          /**
+           * Let you define a module config object
+           * @param moduleConfig Object the module config object
+           * @returns {*}
+           */
+          setModuleConfig: function(moduleConfig) {
+            if(!angular.isObject(moduleConfig)) {
+              throw new Error('You need to give the module config object to set');
+            }
+            modules[moduleConfig.name] = moduleConfig;
+            return moduleConfig;
+          },
+
+          /**
+           * Returns the list of loaded modules
+           * @returns {string[]}
+           */
+          getModules: function() {
+            return regModules;
+          },
+
+          /**
+           * Let you check if a module has been loaded into Angular or not
+           * @param modulesNames String/Object a module name, or a list of module names
+           * @returns {boolean}
+           */
+          isLoaded: function(modulesNames) {
+            var moduleLoaded = function(module) {
+              var isLoaded = regModules.indexOf(module) > -1;
+              if(!isLoaded) {
+                isLoaded = !!moduleExists(module);
+              }
+              return isLoaded;
+            }
+            if(angular.isString(modulesNames)) {
+              modulesNames = [modulesNames];
+            }
+            if(angular.isArray(modulesNames)) {
+              var i, len;
+              for(i = 0, len = modulesNames.length; i < len; i++) {
+                if(!moduleLoaded(modulesNames[i])) {
+                  return false;
+                }
+              }
+              return true;
+            } else {
+              throw new Error('You need to define the module(s) name(s)');
+            }
+          },
+
+          /**
+           * Load a module or a list of modules into Angular
+           * @param module Mixed the name of a predefined module config object, or a module config object, or an array of either
+           * @param params Object optional parameters
+           * @returns promise
+           */
+          load: function(module, params) {
+            var self = this,
+              config = null,
+              moduleCache = [],
+              deferredList = [],
+              deferred = $q.defer(),
+              moduleName,
+              errText;
+
+            if(angular.isUndefined(params)) {
+              params = {};
+            }
+
+            // If module is an array, break it down
+            if(angular.isArray(module)) {
+              // Resubmit each entry as a single module
+              angular.forEach(module, function(m) {
+                if(m) {
+                  deferredList.push(self.load(m, params));
+                }
+              });
+
+              // Resolve the promise once everything has loaded
+              $q.all(deferredList).then(function success() {
+                deferred.resolve(module);
+              }, function error(err) {
+                deferred.reject(err);
+              });
+
+              return deferred.promise;
+            }
+
+            moduleName = getModuleName(module);
+
+            // Get or Set a configuration depending on what was passed in
+            if(typeof module === 'string') {
+              config = self.getModuleConfig(module);
+              if(!config) {
+                config = {
+                  files: [module]
+                };
+                moduleName = null;
+              }
+            } else if(typeof module === 'object') {
+              config = self.setModuleConfig(module);
+            }
+
+            if(config === null) {
+              errText = 'Module "' + moduleName + '" is not configured, cannot load.';
+              $log.error(errText);
+              deferred.reject(new Error(errText));
+            } else {
+              // deprecated
+              if(angular.isDefined(config.template)) {
+                if(angular.isUndefined(config.files)) {
+                  config.files = [];
+                }
+                if(angular.isString(config.template)) {
+                  config.files.push(config.template);
+                } else if(angular.isArray(config.template)) {
+                  config.files.concat(config.template);
+                }
+              }
+            }
+
+            moduleCache.push = function(value) {
+              if(this.indexOf(value) === -1) {
+                Array.prototype.push.apply(this, arguments);
+              }
+            };
+
+            // If this module has been loaded before, re-use it.
+            if(angular.isDefined(moduleName) && moduleExists(moduleName) && regModules.indexOf(moduleName) !== -1) {
+              moduleCache.push(moduleName);
+
+              // if we don't want to load new files, resolve here
+              if(angular.isUndefined(config.files)) {
+                deferred.resolve();
+                return deferred.promise;
+              }
+            }
+
+            var localParams = {};
+            angular.extend(localParams, params, config);
+
+            var loadDependencies = function loadDependencies(module) {
+              var moduleName,
+                loadedModule,
+                requires,
+                diff,
+                promisesList = [];
+
+              moduleName = getModuleName(module);
+              if(moduleName === null) {
+                return $q.when();
+              } else {
+                try {
+                  loadedModule = getModule(moduleName);
+                } catch(e) {
+                  var deferred = $q.defer();
+                  $log.error(e.message);
+                  deferred.reject(e);
+                  return deferred.promise;
+                }
+                requires = getRequires(loadedModule);
+              }
+
+              angular.forEach(requires, function(requireEntry) {
+                // If no configuration is provided, try and find one from a previous load.
+                // If there isn't one, bail and let the normal flow run
+                if(typeof requireEntry === 'string') {
+                  var config = self.getModuleConfig(requireEntry);
+                  if(config === null) {
+                    moduleCache.push(requireEntry); // We don't know about this module, but something else might, so push it anyway.
+                    return;
+                  }
+                  requireEntry = config;
+                }
+
+                // Check if this dependency has been loaded previously
+                if(moduleExists(requireEntry.name)) {
+                  if(typeof module !== 'string') {
+                    // compare against the already loaded module to see if the new definition adds any new files
+                    diff = requireEntry.files.filter(function(n) {
+                      return self.getModuleConfig(requireEntry.name).files.indexOf(n) < 0;
+                    });
+
+                    // If the module was redefined, advise via the console
+                    if(diff.length !== 0) {
+                      $log.warn('Module "', moduleName, '" attempted to redefine configuration for dependency. "', requireEntry.name, '"\n Additional Files Loaded:', diff);
+                    }
+
+                    // Push everything to the file loader, it will weed out the duplicates.
+                    promisesList.push(filesLoader(requireEntry.files, localParams).then(function() {
+                      return loadDependencies(requireEntry);
+                    }));
+                  }
+                  return;
+                } else if(typeof requireEntry === 'object') {
+                  if(requireEntry.hasOwnProperty('name') && requireEntry['name']) {
+                    // The dependency doesn't exist in the module cache and is a new configuration, so store and push it.
+                    self.setModuleConfig(requireEntry);
+                    moduleCache.push(requireEntry['name']);
+                  }
+
+                  // CSS Loading Handler
+                  if(requireEntry.hasOwnProperty('css') && requireEntry['css'].length !== 0) {
+                    // Locate the document insertion point
+                    angular.forEach(requireEntry['css'], function(path) {
+                      buildElement('css', path, localParams);
+                    });
+                  }
+                  // CSS End.
+                }
+
+                // Check if the dependency has any files that need to be loaded. If there are, push a new promise to the promise list.
+                if(requireEntry.hasOwnProperty('files') && requireEntry.files.length !== 0) {
+                  if(requireEntry.files) {
+                    promisesList.push(filesLoader(requireEntry, localParams).then(function() {
+                      return loadDependencies(requireEntry);
+                    }));
+                  }
+                }
+              });
+
+              // Create a wrapper promise to watch the promise list and resolve it once everything is done.
+              return $q.all(promisesList);
+            }
+
+            filesLoader(config, localParams).then(function success() {
+              if(moduleName === null) {
+                deferred.resolve(module);
+              } else {
+                moduleCache.push(moduleName);
+                loadDependencies(moduleName).then(function success() {
+                  try {
+                    justLoaded = [];
+                    register(providers, moduleCache, localParams);
+                  } catch(e) {
+                    $log.error(e.message);
+                    deferred.reject(e);
+                    return;
+                  }
+                  deferred.resolve(module);
+                }, function error(err) {
+                  deferred.reject(err);
+                });
+              }
+            }, function error(err) {
+              deferred.reject(err);
+            });
+
+            return deferred.promise;
+          }
+        };
+      }];
+
+      this.config = function(config) {
+        if(angular.isDefined(config.jsLoader) || angular.isDefined(config.asyncLoader)) {
+          if(!angular.isFunction(config.jsLoader || config.asyncLoader)) {
+            throw('The js loader needs to be a function');
+          }
+          jsLoader = config.jsLoader || config.asyncLoader;
+        }
+
+        if(angular.isDefined(config.cssLoader)) {
+          if(!angular.isFunction(config.cssLoader)) {
+            throw('The css loader needs to be a function');
+          }
+          cssLoader = config.cssLoader;
+        }
+
+        if(angular.isDefined(config.templatesLoader)) {
+          if(!angular.isFunction(config.templatesLoader)) {
+            throw('The template loader needs to be a function');
+          }
+          templatesLoader = config.templatesLoader;
+        }
+
+        // If we want to define modules configs
+        if(angular.isDefined(config.modules)) {
+          if(angular.isArray(config.modules)) {
+            angular.forEach(config.modules, function(moduleConfig) {
+              modules[moduleConfig.name] = moduleConfig;
+            });
+          } else {
+            modules[config.modules.name] = config.modules;
+          }
+        }
+
+        if(angular.isDefined(config.debug)) {
+          debug = config.debug;
+        }
+
+        if(angular.isDefined(config.events)) {
+          events = config.events;
+        }
+      };
+    }]);
+
+  ocLazyLoad.directive('ocLazyLoad', ['$ocLazyLoad', '$compile', '$animate', '$parse',
+    function($ocLazyLoad, $compile, $animate, $parse) {
+      return {
+        restrict: 'A',
+        terminal: true,
+        priority: 1000,
+        compile: function(element, attrs) {
+          // we store the content and remove it before compilation
+          var content = element[0].innerHTML;
+          element.html('');
+
+          return function($scope, $element, $attr) {
+            var model = $parse($attr.ocLazyLoad);
+            $scope.$watch(function() {
+              // it can be a module name (string), an object, an array, or a scope reference to any of this
+              return model($scope) || $attr.ocLazyLoad;
+            }, function(moduleName) {
+              if(angular.isDefined(moduleName)) {
+                $ocLazyLoad.load(moduleName).then(function success(moduleConfig) {
+                  $animate.enter($compile(content)($scope), null, $element);
+                });
+              }
+            }, true);
+          };
+        }
+      };
+    }]);
+
+  /**
+   * Get the list of required modules/services/... for this module
+   * @param module
+   * @returns {Array}
+   */
+  function getRequires(module) {
+    var requires = [];
+    angular.forEach(module.requires, function(requireModule) {
+      if(regModules.indexOf(requireModule) === -1) {
+        requires.push(requireModule);
+      }
+    });
+    return requires;
+  }
+
+  /**
+   * Check if a module exists and returns it if it does
+   * @param moduleName
+   * @returns {boolean}
+   */
+  function moduleExists(moduleName) {
+    try {
+      return angular.module(moduleName);
+    } catch(e) {
+      if(/No module/.test(e) || (e.message.indexOf('$injector:nomod') > -1)) {
+        return false;
+      }
+    }
+  }
+
+  function getModule(moduleName) {
+    try {
+      return angular.module(moduleName);
+    } catch(e) {
+      // this error message really suxx
+      if(/No module/.test(e) || (e.message.indexOf('$injector:nomod') > -1)) {
+        e.message = 'The module "' + moduleName + '" that you are trying to load does not exist. ' + e.message
+      }
+      throw e;
+    }
+  }
+
+  function invokeQueue(providers, queue, moduleName, reconfig) {
+    if(!queue) {
+      return;
+    }
+
+    var i, len, args, provider;
+    for(i = 0, len = queue.length; i < len; i++) {
+      args = queue[i];
+      if(angular.isArray(args)) {
+        if(providers !== null) {
+          if(providers.hasOwnProperty(args[0])) {
+            provider = providers[args[0]];
+          } else {
+            throw new Error('unsupported provider ' + args[0]);
+          }
+        }
+        var isNew = registerInvokeList(args, moduleName);
+        if(args[1] !== 'invoke') {
+          if(isNew && angular.isDefined(provider)) {
+            provider[args[1]].apply(provider, args[2]);
+          }
+        } else { // config block
+          var callInvoke = function(fct) {
+            var invoked = regConfigs.indexOf(moduleName + '-' + fct);
+            if(invoked === -1 || reconfig) {
+              if(invoked === -1) {
+                regConfigs.push(moduleName + '-' + fct);
+              }
+              if(angular.isDefined(provider)) {
+                provider[args[1]].apply(provider, args[2]);
+              }
+            }
+          }
+          if(angular.isFunction(args[2][0])) {
+            callInvoke(args[2][0]);
+          } else if(angular.isArray(args[2][0])) {
+            for(var j = 0, jlen = args[2][0].length; j < jlen; j++) {
+              if(angular.isFunction(args[2][0][j])) {
+                callInvoke(args[2][0][j]);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Register a new module and load it
+   * @param providers
+   * @param registerModules
+   * @returns {*}
+   */
+  function register(providers, registerModules, params) {
+    if(registerModules) {
+      var k, r, moduleName, moduleFn, tempRunBlocks = [];
+      for(k = registerModules.length - 1; k >= 0; k--) {
+        moduleName = registerModules[k];
+        if(typeof moduleName !== 'string') {
+          moduleName = getModuleName(moduleName);
+        }
+        if(!moduleName || justLoaded.indexOf(moduleName) !== -1) {
+          continue;
+        }
+        var newModule = regModules.indexOf(moduleName) === -1;
+        moduleFn = angular.module(moduleName);
+        if(newModule) { // new module
+          regModules.push(moduleName);
+          register(providers, moduleFn.requires, params);
+        }
+        if(moduleFn._runBlocks.length > 0) {
+          // new run blocks detected! Replace the old ones (if existing)
+          runBlocks[moduleName] = [];
+          while(moduleFn._runBlocks.length > 0) {
+            runBlocks[moduleName].push(moduleFn._runBlocks.shift());
+          }
+        }
+        if(angular.isDefined(runBlocks[moduleName]) && (newModule || params.rerun)) {
+          tempRunBlocks = tempRunBlocks.concat(runBlocks[moduleName]);
+        }
+        invokeQueue(providers, moduleFn._invokeQueue, moduleName, params.reconfig);
+        invokeQueue(providers, moduleFn._configBlocks, moduleName, params.reconfig); // angular 1.3+
+        broadcast(newModule ? 'ocLazyLoad.moduleLoaded' : 'ocLazyLoad.moduleReloaded', moduleName);
+        registerModules.pop();
+        justLoaded.push(moduleName);
+      }
+      // execute the run blocks at the end
+      var instanceInjector = providers.getInstanceInjector();
+      angular.forEach(tempRunBlocks, function(fn) {
+        instanceInjector.invoke(fn);
+      });
+    }
+  }
+
+  /**
+   * Register an invoke
+   * @param args
+   * @returns {*}
+   */
+  function registerInvokeList(args, moduleName) {
+    var invokeList = args[2][0],
+      type = args[1],
+      newInvoke = false;
+    if(angular.isUndefined(regInvokes[moduleName])) {
+      regInvokes[moduleName] = {};
+    }
+    if(angular.isUndefined(regInvokes[moduleName][type])) {
+      regInvokes[moduleName][type] = [];
+    }
+    var onInvoke = function(invokeName) {
+      newInvoke = true;
+      regInvokes[moduleName][type].push(invokeName);
+      broadcast('ocLazyLoad.componentLoaded', [moduleName, type, invokeName]);
+    }
+    if(angular.isString(invokeList) && regInvokes[moduleName][type].indexOf(invokeList) === -1) {
+      onInvoke(invokeList);
+    } else if(angular.isObject(invokeList)) {
+      angular.forEach(invokeList, function(invoke) {
+        if(angular.isString(invoke) && regInvokes[moduleName][type].indexOf(invoke) === -1) {
+          onInvoke(invoke);
+        }
+      });
+    } else {
+      return false;
+    }
+    return newInvoke;
+  }
+
+  function getModuleName(module) {
+    var moduleName = null;
+    if(angular.isString(module)) {
+      moduleName = module;
+    } else if(angular.isObject(module) && module.hasOwnProperty('name') && angular.isString(module.name)) {
+      moduleName = module.name;
+    }
+    return moduleName;
+  }
+
+  /**
+   * Get the list of existing registered modules
+   * @param element
+   */
+  function init(element) {
+    if(initModules.length === 0) {
+      var elements = [element],
+        names = ['ng:app', 'ng-app', 'x-ng-app', 'data-ng-app'],
+        NG_APP_CLASS_REGEXP = /\sng[:\-]app(:\s*([\w\d_]+);?)?\s/,
+        append = function append(elm) {
+          return (elm && elements.push(elm));
+        };
+
+      angular.forEach(names, function(name) {
+        names[name] = true;
+        append(document.getElementById(name));
+        name = name.replace(':', '\\:');
+        if(element[0].querySelectorAll) {
+          angular.forEach(element[0].querySelectorAll('.' + name), append);
+          angular.forEach(element[0].querySelectorAll('.' + name + '\\:'), append);
+          angular.forEach(element[0].querySelectorAll('[' + name + ']'), append);
+        }
+      });
+
+      angular.forEach(elements, function(elm) {
+        if(initModules.length === 0) {
+          var className = ' ' + element.className + ' ';
+          var match = NG_APP_CLASS_REGEXP.exec(className);
+          if(match) {
+            initModules.push((match[2] || '').replace(/\s+/g, ','));
+          } else {
+            angular.forEach(elm.attributes, function(attr) {
+              if(initModules.length === 0 && names[attr.name]) {
+                initModules.push(attr.value);
+              }
+            });
+          }
+        }
+      });
+    }
+    if(initModules.length === 0) {
+      throw 'No module found during bootstrap, unable to init ocLazyLoad';
+    }
+
+    var addReg = function addReg(moduleName) {
+      if(regModules.indexOf(moduleName) === -1) {
+        // register existing modules
+        regModules.push(moduleName);
+        var mainModule = angular.module(moduleName);
+
+        // register existing components (directives, services, ...)
+        invokeQueue(null, mainModule._invokeQueue, moduleName);
+        invokeQueue(null, mainModule._configBlocks, moduleName); // angular 1.3+
+
+        angular.forEach(mainModule.requires, addReg);
+      }
+    };
+
+    angular.forEach(initModules, function(moduleName) {
+      addReg(moduleName);
+    });
+  }
+
+  var bootstrap = angular.bootstrap;
+  angular.bootstrap = function(element, modules, config) {
+    initModules = modules.slice(); // make a clean copy
+    return bootstrap(element, modules, config);
+  };
+
+  // Array.indexOf polyfill for IE8
+  if(!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(searchElement, fromIndex) {
+
+      var k;
+
+      // 1. Let O be the result of calling ToObject passing
+      //    the this value as the argument.
+      if(this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var O = Object(this);
+
+      // 2. Let lenValue be the result of calling the Get
+      //    internal method of O with the argument "length".
+      // 3. Let len be ToUint32(lenValue).
+      var len = O.length >>> 0;
+
+      // 4. If len is 0, return -1.
+      if(len === 0) {
+        return -1;
+      }
+
+      // 5. If argument fromIndex was passed let n be
+      //    ToInteger(fromIndex); else let n be 0.
+      var n = +fromIndex || 0;
+
+      if(Math.abs(n) === Infinity) {
+        n = 0;
+      }
+
+      // 6. If n >= len, return -1.
+      if(n >= len) {
+        return -1;
+      }
+
+      // 7. If n >= 0, then Let k be n.
+      // 8. Else, n<0, Let k be len - abs(n).
+      //    If k is less than 0, then let k be 0.
+      k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+      // 9. Repeat, while k < len
+      while(k < len) {
+        // a. Let Pk be ToString(k).
+        //   This is implicit for LHS operands of the in operator
+        // b. Let kPresent be the result of calling the
+        //    HasProperty internal method of O with argument Pk.
+        //   This step can be combined with c
+        // c. If kPresent is true, then
+        //    i.  Let elementK be the result of calling the Get
+        //        internal method of O with the argument ToString(k).
+        //   ii.  Let same be the result of applying the
+        //        Strict Equality Comparison Algorithm to
+        //        searchElement and elementK.
+        //  iii.  If same is true, return k.
+        if(k in O && O[k] === searchElement) {
+          return k;
+        }
+        k++;
+      }
+      return -1;
+    };
+  }
+})();
+
+define("ocLazyLoad", ["angular"], function(){});
+
+
+
+/**
+ * @ngdoc overview
+ * @name app [smartadminApp]
+ * @description
+ * # app [smartadminApp]
+ *
+ * Main module of the application.
+ */
+
+define('app',[
+    'angular',
+    'angular-ui-router',
+    'angular-animate',
+    'angular-bootstrap',
+    'angular-sanitize', // http://myorange.ca/supportforum/question/how-to-completely-remove-chat-module-in-angularjs-version
+    'ocLazyLoad' //,
+    //'notification'
+], function (angular) {
+
+    var app = angular.module('app', [
+        'ngSanitize',
+        'oc.lazyLoad',
+        'ngAnimate',
+        'ui.router',
+        'ui.bootstrap'
+        // App
+        //'app.auth',
+        //'app.layout',
+        //'app.dashboard'
+    ,"smart-templates"]);
+
+    app.config(["$provide", "$httpProvider", "$ocLazyLoadProvider", function ($provide, $httpProvider, $ocLazyLoadProvider) {
+
+        $ocLazyLoadProvider.config({
+          jsLoader: requirejs,
+          debug: true
+        });
+
+        // Intercept http calls.
+        $provide.factory('ErrorHttpInterceptor', ["$q", function ($q) {
+            var errorCounter = 0;
+            function notifyError(rejection){
+                console.log(rejection);
+                $.bigBox({
+                    title: rejection.status + ' ' + rejection.statusText,
+                    content: rejection.data,
+                    color: "#C46A69",
+                    icon: "fa fa-warning shake animated",
+                    number: ++errorCounter,
+                    timeout: 6000
+                });
+            }
+
+            return {
+                // On request failure
+                requestError: function (rejection) {
+                    // show notification
+                    notifyError(rejection);
+
+                    // Return the promise rejection.
+                    return $q.reject(rejection);
+                },
+
+                // On response failure
+                responseError: function (rejection) {
+                    // show notification
+                    notifyError(rejection);
+                    // Return the promise rejection.
+                    return $q.reject(rejection);
+                }
+            };
+        }]);
+
+        // Add the interceptor to the $httpProvider.
+        $httpProvider.interceptors.push('ErrorHttpInterceptor');
+
+    }]);
+
+    app.run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        // editableOptions.theme = 'bs3';
+    }]);
+
+    return app;
+});
+
+// Defer AngularJS bootstrap
+window.name = "NG_DEFER_BOOTSTRAP!";
+
+define('main',[
+    'require',
+    'jquery',
+    'angular',
+    'domReady',
+
+    //'pace',
+    'bootstrap',
+    //'appConfig',
+    'app'
+    //'includes'
+], function (require, $, angular, domReady) {
     
-};
+
+    $.sound_path = appConfig.sound_path;
+    $.sound_on = appConfig.sound_on;
 
 
-/*
-* END APP.appConfig
-*/
-;
-define("appConfig", function(){});
+    domReady(function (document) {
+        angular.bootstrap(document, ['app']);
+        angular.resumeBootstrap();
+    });
+});
 
-define('app',["angular","angular-couch-potato","angular-ui-router","angular-animate","angular-bootstrap","angular-sanitize","notification"],function(a,b){var c=a.module("app",["ngSanitize","scs.couch-potato","ngAnimate","ui.router","ui.bootstrap","app.auth","app.layout","app.dashboard","smart-templates"]);return b.configureApp(c),c.config(["$provide","$httpProvider",function(a,b){a.factory("ErrorHttpInterceptor",["$q",function(a){function b(a){console.log(a),$.bigBox({title:a.status+" "+a.statusText,content:a.data,color:"#C46A69",icon:"fa fa-warning shake animated",number:++c,timeout:6e3})}var c=0;return{requestError:function(c){return b(c),a.reject(c)},responseError:function(c){return b(c),a.reject(c)}}}]),b.interceptors.push("ErrorHttpInterceptor")}]),c.run(["$couchPotato","$rootScope","$state","$stateParams",function(a,b,d,e){c.lazy=a,b.$state=d,b.$stateParams=e}]),c});
-define('auth/module',["angular","angular-couch-potato","angular-ui-router","angular-google-plus","angular-easyfb"],function(a,b){var c=a.module("app.auth",["ui.router"]);b.configureApp(c);var d={googleClientId:"678402726462-ah1p6ug0klf9jm8cplefmphfupg3bg2h.apps.googleusercontent.com",facebookAppId:"620275558085318"};return c.config(["$stateProvider","$couchPotatoProvider",function(a,b){a.state("realLogin",{url:"/real-login",views:{root:{templateUrl:"build/auth/login/login.html",controller:"LoginCtrl",resolve:{deps:b.resolveDependencies(["auth/models/User","auth/directives/loginInfo","auth/login/LoginCtrl","auth/login/directives/facebookSignin","auth/login/directives/googleSignin"])}}},data:{title:"Login",rootId:"extra-page"}}).state("login",{url:"/login",views:{root:{templateUrl:"build/auth/views/login.html"}},data:{title:"Login",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("register",{url:"/register",views:{root:{templateUrl:"build/auth/views/register.html"}},data:{title:"Register",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("forgotPassword",{url:"/forgot-password",views:{root:{templateUrl:"build/auth/views/forgot-password.html"}},data:{title:"Forgot Password",htmlId:"extr-page"},resolve:{deps:b.resolveDependencies(["modules/forms/directives/validate/smartValidateForm"])}}).state("lock",{url:"/lock",views:{root:{templateUrl:"build/auth/views/lock.html"}},data:{title:"Locked Screen",htmlId:"lock-page"}})}]).constant("authKeys",d),c.run(["$couchPotato",function(a){c.lazy=a}]),c});
-define('auth/models/User',["auth/module"],function(a){return a.registerFactory("User",["$http","$q",function(a,b){var c=b.defer(),d={initialized:c.promise,username:void 0,picture:void 0};return a.get("api/user.json").then(function(a){d.username=a.data.username,d.picture=a.data.picture,c.resolve(d)}),d}])});
-define('layout/module',["angular","angular-couch-potato","angular-ui-router"],function(a,b){var c=a.module("app.layout",["ui.router"]);return b.configureApp(c),c.config(["$stateProvider","$couchPotatoProvider","$urlRouterProvider",function(a,b,c){a.state("app",{"abstract":!0,views:{root:{templateUrl:"build/layout/layout.tpl.html",resolve:{deps:b.resolveDependencies(["auth/directives/loginInfo"])}}}}),c.otherwise("/dashboard")}]),c.run(["$couchPotato",function(a){c.lazy=a}]),c});
-define('layout/actions/minifyMenu',["layout/module"],function(a){a.registerDirective("minifyMenu",function(){return{restrict:"A",link:function(a,b){var c=$("body"),d=function(){c.hasClass("menu-on-top")||(c.toggleClass("minified"),c.removeClass("hidden-menu"),$("html").removeClass("hidden-menu-mobile-lock"))};b.on("click",d)}}})});
-define('layout/actions/toggleMenu',["layout/module"],function(a){a.registerDirective("toggleMenu",function(){return{restrict:"A",link:function(a,b){var c=$("body"),d=function(){c.hasClass("menu-on-top")?c.hasClass("menu-on-top")&&c.hasClass("mobile-view-activated")&&($("html").toggleClass("hidden-menu-mobile-lock"),c.toggleClass("hidden-menu"),c.removeClass("minified")):($("html").toggleClass("hidden-menu-mobile-lock"),c.toggleClass("hidden-menu"),c.removeClass("minified"))};b.on("click",d),a.$on("requestToggleMenu",function(){d()})}}})});
-define('layout/actions/fullScreen',["layout/module"],function(a){a.registerDirective("fullScreen",function(){return{restrict:"A",link:function(a,b){var c=$("body"),d=function(){c.hasClass("full-screen")?(c.removeClass("full-screen"),document.exitFullscreen?document.exitFullscreen():document.mozCancelFullScreen?document.mozCancelFullScreen():document.webkitExitFullscreen&&document.webkitExitFullscreen()):(c.addClass("full-screen"),document.documentElement.requestFullscreen?document.documentElement.requestFullscreen():document.documentElement.mozRequestFullScreen?document.documentElement.mozRequestFullScreen():document.documentElement.webkitRequestFullscreen?document.documentElement.webkitRequestFullscreen():document.documentElement.msRequestFullscreen&&document.documentElement.msRequestFullscreen())};b.on("click",d)}}})});
-define('layout/actions/resetWidgets',["layout/module"],function(a){a.registerDirective("resetWidgets",["$state",function(){return{restrict:"A",link:function(a,b){b.on("click",function(){$.SmartMessageBox({title:"<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",content:"Would you like to RESET all your saved widgets and clear LocalStorage?1",buttons:"[No][Yes]"},function(a){"Yes"==a&&localStorage&&(localStorage.clear(),location.reload())})})}}}])});
-define('layout/actions/searchMobile',["layout/module"],function(a){a.registerDirective("searchMobile",function(){return{restrict:"A",compile:function(a){a.removeAttr("search-mobile data-search-mobile"),a.on("click",function(a){$("body").addClass("search-mobile"),a.preventDefault()}),$("#cancel-search-js").on("click",function(a){$("body").removeClass("search-mobile"),a.preventDefault()})}}})});
-define('layout/directives/smartInclude',["layout/module"],function(a){return a.registerDirective("smartInclude",function(){return{replace:!0,restrict:"A",templateUrl:function(a,b){return b.smartInclude},compile:function(a){a[0].className=a[0].className.replace(/placeholder[^\s]+/g,"")}}})});
-define('layout/directives/smartDeviceDetect',["layout/module"],function(a){a.registerDirective("smartDeviceDetect",function(){return{restrict:"A",compile:function(a){a.removeAttr("smart-device-detect data-smart-device-detect");var b=/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase());a.toggleClass("desktop-detected",!b),a.toggleClass("mobile-detected",b)}}})});
-define('layout/directives/smartFastClick',["layout/module","require","fastclick"],function(a,b){a.registerDirective("smartFastClick",function(){var a=b("fastclick");return{restrict:"A",compile:function(b){b.removeAttr("smart-fast-click data-smart-fast-click"),a.attach(b),a.notNeeded()||b.addClass("needsclick")}}})});
-define('layout/directives/smartLayout',["layout/module","lodash"],function(a,b){a.registerDirective("smartLayout",["$rootScope","$timeout","$interval","$q","SmartCss",function(a,c,d,e){var f=!1,g=e.defer();g.promise.then(function(){f=!0});var h,i,j,k,l=$(window),m=($(document),$("html")),n=$("body");return function o(){h=$("#header"),i=$("#left-panel"),j=$("#ribbon"),k=$(".page-footer"),b.every([h,i,j,k],function(a){return angular.isNumber(a.height())})?g.resolve():c(o,100)}(),{priority:2014,restrict:"A",compile:function(e){function o(){var b=n.hasClass("menu-on-top")&&i.is(":visible")?i.height():0,c=!n.hasClass("menu-on-top")&&i.is(":visible")?i.width()+i.offset().left:0,d=$("#content"),e=d.outerWidth(!0)-d.width(),f=d.outerHeight(!0)-d.height();u=l.width()-c-e,v=l.height()-b-f-h.height()-j.height()-k.height(),w=z-u,x=y-v,(Math.abs(w)||Math.abs(x)||A)&&(a.$broadcast("$smartContentResize",{width:u,height:v,deltaX:w,deltaY:x}),z=u,y=v,A=!1)}function p(a){g.promise.then(function(){r(a)})}function q(){B=!1}function r(a){c(function(){B=!0},a)}function s(){n.toggleClass("mobile-view-activated",l.width()<979),l.width()<979&&n.removeClass("minified"),o()}function t(a){a.data&&a.data.htmlId?m.attr("id",a.data.htmlId):m.removeAttr("id")}e.removeAttr("smart-layout data-smart-layout");var u,v,w,x,y=0,z=0,A=!1,B=!1;d(function(){B&&s()},300);var C=b.debounce(function(){p(300)},300);p(10),a.$on("$stateChangeStart",function(a,b){t(b),q()});var D=1;a.$on("$viewContentLoading",function(){D++}),a.$on("$stateChangeSuccess",function(){A=!0}),a.$on("$viewContentLoaded",function(){D--,0==D&&f&&C()})}}}])});
-define('layout/directives/smartSpeech',["layout/module","jquery"],function(a,b){b.root_=b("body");var c=window;if(appConfig.voice_command)var d=appConfig.commands;var e=c.SpeechRecognition||c.webkitSpeechRecognition||c.mozSpeechRecognition||c.msSpeechRecognition||c.oSpeechRecognition;b.speechApp=function(a){return a.start=function(){smartSpeechRecognition.addCommands(d),smartSpeechRecognition?(smartSpeechRecognition.start(),b.root_.addClass("voice-command-active"),b.speechApp.playON(),appConfig.voice_localStorage&&localStorage.setItem("sm-setautovoice","true")):alert("speech plugin not loaded")},a.stop=function(){smartSpeechRecognition&&(smartSpeechRecognition.abort(),b.root_.removeClass("voice-command-active"),b.speechApp.playOFF(),appConfig.voice_localStorage&&localStorage.setItem("sm-setautovoice","false"),b("#speech-btn .popover").is(":visible")&&b("#speech-btn .popover").fadeOut(250))},a.playON=function(){var a=document.createElement("audio");navigator.userAgent.match("Firefox/")?a.setAttribute("src",appConfig.sound_path+"voice_on.ogg"):a.setAttribute("src",appConfig.sound_path+"voice_on.mp3"),a.addEventListener("load",function(){a.play()},!0),appConfig.sound_on&&(a.pause(),a.play())},a.playOFF=function(){var a=document.createElement("audio");navigator.userAgent.match("Firefox/")?a.setAttribute("src",appConfig.sound_path+"voice_off.ogg"):a.setAttribute("src",appConfig.sound_path+"voice_off.mp3"),b.get(),a.addEventListener("load",function(){a.play()},!0),appConfig.sound_on&&(a.pause(),a.play())},a.playConfirmation=function(){var a=document.createElement("audio");navigator.userAgent.match("Firefox/")?a.setAttribute("src",appConfig.sound_path+"voice_alert.ogg"):a.setAttribute("src",appConfig.sound_path+"voice_alert.mp3"),b.get(),a.addEventListener("load",function(){a.play()},!0),appConfig.sound_on&&(a.pause(),a.play())},a}({}),function(a){if(!e)return c.smartSpeechRecognition=null,a;var d,f,g=[],h={start:[],error:[],end:[],result:[],resultMatch:[],resultNoMatch:[],errorNetwork:[],errorPermissionBlocked:[],errorPermissionDenied:[]},i=0,j=/\s*\((.*?)\)\s*/g,k=/(\(\?:[^)]+\))\?/g,l=/(\(\?)?:\w+/g,m=/\*\w+/g,n=/[\-{}\[\]+?.,\\\^$|#]/g,o=function(a){return a=a.replace(n,"\\$&").replace(j,"(?:$1)?").replace(l,function(a,b){return b?a:"([^\\s]+)"}).replace(m,"(.*?)").replace(k,"\\s*$1?\\s*"),new RegExp("^"+a+"$","i")},p=function(a){a.forEach(function(a){a.callback.apply(a.context)})},q=function(){r()||c.smartSpeechRecognition.init({},!1)},r=function(){return d!==a};c.smartSpeechRecognition={init:function(j,k){k=k===a?!0:!!k,d&&d.abort&&d.abort(),d=new e,d.maxAlternatives=5,d.continuous=!0,d.lang=appConfig.voice_command_lang||"en-US",d.onstart=function(){p(h.start),appConfig.debugState&&(c.console.log("%c ✔ SUCCESS: User allowed access the microphone service to start ",appConfig.debugStyle_success),c.console.log("Language setting is set to: "+d.lang,appConfig.debugStyle)),b.root_.removeClass("service-not-allowed"),b.root_.addClass("service-allowed")},d.onerror=function(a){switch(p(h.error),a.error){case"network":p(h.errorNetwork);break;case"not-allowed":case"service-not-allowed":f=!1,b.root_.removeClass("service-allowed"),b.root_.addClass("service-not-allowed"),appConfig.debugState&&c.console.log("%c WARNING: Microphone was not detected (either user denied access or it is not installed properly) ",appConfig.debugStyle_warning),p((new Date).getTime()-i<200?h.errorPermissionBlocked:h.errorPermissionDenied)}},d.onend=function(){if(p(h.end),f){var a=(new Date).getTime()-i;1e3>a?setTimeout(c.smartSpeechRecognition.start,1e3-a):c.smartSpeechRecognition.start()}},d.onresult=function(a){p(h.result);for(var d,e=a.results[a.resultIndex],f=0;f<e.length;f++){d=e[f].transcript.trim(),appConfig.debugState&&c.console.log("Speech recognized: %c"+d,appConfig.debugStyle);for(var i=0,j=g.length;j>i;i++){var k=g[i].command.exec(d);if(k){var l=k.slice(1);appConfig.debugState&&(c.console.log("command matched: %c"+g[i].originalPhrase,appConfig.debugStyle),l.length&&c.console.log("with parameters",l)),g[i].callback.apply(this,l),p(h.resultMatch);var m=["sound on","mute","stop"];return m.indexOf(g[i].originalPhrase)<0&&(console.log(2),b.smallBox({title:g[i].originalPhrase,content:"loading...",color:"#333",sound_file:"voice_alert",timeout:2e3}),b("#speech-btn .popover").is(":visible")&&b("#speech-btn .popover").fadeOut(250)),!0}}}return p(h.resultNoMatch),b.smallBox({title:'Error: <strong> " '+d+' " </strong> no match found!',content:"Please speak clearly into the microphone",color:"#a90329",timeout:5e3,icon:"fa fa-microphone"}),b("#speech-btn .popover").is(":visible")&&b("#speech-btn .popover").fadeOut(250),!1},k&&(g=[]),j.length&&this.addCommands(j)},start:function(b){q(),b=b||{},f=b.autoRestart!==a?!!b.autoRestart:!0,i=(new Date).getTime(),d.start()},abort:function(){f=!1,r&&d.abort()},debug:function(a){appConfig.debugState=arguments.length>0?!!a:!0},setLanguage:function(a){q(),d.lang=a},addCommands:function(a){var b,d;q();for(var e in a)if(a.hasOwnProperty(e)){if(b=c[a[e]]||a[e],"function"!=typeof b)continue;d=o(e),g.push({command:d,callback:b,originalPhrase:e})}appConfig.debugState&&c.console.log("Commands successfully loaded: %c"+g.length,appConfig.debugStyle)},removeCommands:function(b){return b===a?void(g=[]):(b=Array.isArray(b)?b:[b],void(g=g.filter(function(a){for(var c=0;c<b.length;c++)if(b[c]===a.originalPhrase)return!1;return!0})))},addCallback:function(b,d,e){if(h[b]!==a){var f=c[d]||d;"function"==typeof f&&h[b].push({callback:f,context:e||this})}}}}.call(this);var f=function(){smartSpeechRecognition.addCommands(d),smartSpeechRecognition?(smartSpeechRecognition.start(),b.root_.addClass("voice-command-active"),appConfig.voice_localStorage&&localStorage.setItem("sm-setautovoice","true")):alert("speech plugin not loaded")};e&&appConfig.voice_command&&"true"==localStorage.getItem("sm-setautovoice")&&f(),e&&appConfig.voice_command_auto&&appConfig.voice_command&&f(),a.registerDirective("speechRecognition",["$log",function(){var a=function(a,c){if(e&&appConfig.voice_command){var f=b('<div class="modal fade" id="voiceModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"></div></div></div>');f.appendTo("body"),c.on("click",function(a){b.root_.hasClass("voice-command-active")?b.speechApp.stop():(b.speechApp.start(),b("#speech-btn .popover").fadeIn(350)),a.preventDefault()}),b(document).mouseup(function(a){b("#speech-btn .popover").is(a.target)||0!==b("#speech-btn .popover").has(a.target).length||b("#speech-btn .popover").fadeOut(250)}),b("#speech-help-btn").on("click",function(){d.help()})}else b("#speech-btn").addClass("display-none")};return{restrict:"AE",link:a}}])});
-define('layout/directives/smartRouterAnimationWrap',["layout/module","lodash"],function(a,b){a.registerDirective("smartRouterAnimationWrap",["$rootScope","$timeout",function(a,c){return{restrict:"A",compile:function(d,e){function f(){j=!0,d.css({height:d.height()+"px",overflow:"hidden"}).addClass("active"),$(h).addClass("animated faster fadeOutDown")}function g(){j&&(d.css({height:"auto",overflow:"visible"}).removeClass("active"),$(h).addClass("animated faster fadeInUp"),j=!1,c(function(){$(h).removeClass("animated")},10))}d.removeAttr("smart-router-animation-wrap data-smart-router-animation-wrap wrap-for data-wrap-for"),d.addClass("router-animation-container"),$('<div class="router-animation-loader"><i class="fa fa-gear fa-4x fa-spin"></i></div>').appendTo(d);var h=e.wrapFor,i=e.smartRouterAnimationWrap.split(/\s/),j=!1,k=a.$on("$stateChangeStart",function(a,c,d,e){var g=b.any(i,function(a){return b.has(c.views,a)||b.has(e.views,a)});g&&f()}),l=a.$on("$viewContentLoaded",function(){g()});d.on("$destroy",function(){k(),l()})}}}])});
-define('layout/directives/smartFitAppView',["layout/module","lodash"],function(a){a.registerDirective("smartFitAppView",["$rootScope","SmartCss",function(a,b){return{restrict:"A",compile:function(c,d){c.removeAttr("smart-fit-app-view data-smart-fit-app-view leading-y data-leading-y");var e=d.leadingY?parseInt(d.leadingY):0,f=d.smartFitAppView;if(b.appViewSize&&b.appViewSize.height){var g=b.appViewSize.height-e<252?252:b.appViewSize.height-e;b.add(f,"height",g+"px")}var h=a.$on("$smartContentResize",function(a,c){var d=c.height-e<252?252:c.height-e;b.add(f,"height",d+"px")});c.on("$destroy",function(){h(),b.remove(f,"height")})}}}])});
-define('layout/directives/radioToggle',["layout/module"],function(a){a.registerDirective("radioToggle",["$log",function(){return{scope:{model:"=ngModel",value:"@value"},link:function(a,b){b.parent().on("click",function(){a.model=a.value,a.$apply()})}}}])});
-define('layout/directives/dismisser',["layout/module"],function(a){a.registerDirective("dismisser",function(){return{restrict:"A",compile:function(a){a.removeAttr("dismisser data-dissmiser");var b='<button class="close">&times;</button>';a.prepend(b),a.on("click",">button.close",function(){a.fadeOut("fast",function(){$(this).remove()})})}}})});
-define('layout/directives/smartMenu',["layout/module","jquery"],function(a){!function(a){a.fn.smartCollapseToggle=function(){return this.each(function(){var b=a("body"),c=a(this);b.hasClass("menu-on-top")||(b.hasClass("mobile-view-activated"),c.toggleClass("open"),b.hasClass("minified")?c.closest("nav ul ul").length&&(c.find(">a .collapse-sign .fa").toggleClass("fa-minus-square-o fa-plus-square-o"),c.find("ul:first").slideToggle(appConfig.menu_speed||200)):(c.find(">a .collapse-sign .fa").toggleClass("fa-minus-square-o fa-plus-square-o"),c.find("ul:first").slideToggle(appConfig.menu_speed||200)))})}}(jQuery),a.registerDirective("smartMenu",["$state","$rootScope",function(a,b){return{restrict:"A",link:function(a,c){var d=$("body"),e=c.find("li[data-menu-collapse]");e.each(function(a,b){var c=$(b);c.on("click",">a",function(a){c.siblings(".open").smartCollapseToggle(),c.smartCollapseToggle(),!c.hasClass("open")&&c.find("li.active").length>0&&c.addClass("active"),a.preventDefault()}).find(">a").append('<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>'),c.find("li.active").length&&(c.smartCollapseToggle(),c.find("li.active").parents("li").addClass("active"))}),c.on("click","a[data-ui-sref]",function(){$(this).parents("li").addClass("active").each(function(){$(this).siblings("li.open").smartCollapseToggle(),$(this).siblings("li").removeClass("active")}),d.hasClass("mobile-view-activated")&&b.$broadcast("requestToggleMenu")}),a.$on("$smartLayoutMenuOnTop",function(a,b){b&&e.filter(".open").smartCollapseToggle()})}}}])});
-define('layout/directives/bigBreadcrumbs',["layout/module","lodash"],function(a,b){a.registerDirective("bigBreadcrumbs",function(){return{restrict:"E",replace:!0,template:'<div><h1 class="page-title txt-color-blueDark"></h1></div>',scope:{items:"=",icon:"@"},link:function(a,c){var d=b.first(a.items),e=a.icon||"home";c.find("h1").append('<i class="fa-fw fa fa-'+e+'"></i> '+d),b.rest(a.items).forEach(function(a){c.find("h1").append(" <span>> "+a+"</span>")})}}})});
-define('layout/directives/stateBreadcrumbs',["layout/module"],function(a){a.registerDirective("stateBreadcrumbs",["$rootScope","$state",function(a,b){return{restrict:"E",replace:!0,template:'<ol class="breadcrumb"><li>Home</li></ol>',link:function(c,d){function e(a){var b="<li>Home</li>";angular.forEach(a,function(a){b+="<li>"+a+"</li>"}),d.html(b)}function f(a,c){var d=b.get(a);d&&d.data&&d.data.title&&-1==c.indexOf(d.data.title)&&c.unshift(d.data.title);var e=a.replace(/.?\w+$/,"");return e?f(e,c):c}function g(a){var b;b=a.data&&a.data.breadcrumbs?a.data.breadcrumbs:f(a.name,[]),e(b)}g(b.current),a.$on("$stateChangeStart",function(a,b){g(b)})}}}])});
-define('layout/directives/smartPageTitle',["layout/module"],function(a){a.registerDirective("smartPageTitle",["$rootScope","$timeout",function(a,b){return{restrict:"A",compile:function(c,d){c.removeAttr("smart-page-title data-smart-page-title");var e=d.smartPageTitle,f=function(a,c){var d=e;c.data&&c.data.title&&(d=c.data.title+" | "+d),b(function(){$("html head title").text(d)})};a.$on("$stateChangeStart",f)}}}])});
-define('layout/directives/hrefVoid',["layout/module"],function(a){a.registerDirective("hrefVoid",function(){return{restrict:"A",link:function(a,b){b.attr("href","#"),b.on("click",function(a){a.preventDefault(),a.stopPropagation()})}}})});
-define('layout/service/SmartCss',["layout/module","lodash"],function(a,b){a.registerFactory("SmartCss",["$rootScope","$timeout",function(a,c){var d=function(){var a=document.createElement("style");return a.appendChild(document.createTextNode("")),document.head.appendChild(a),a.sheet}(),e={},f={writeRule:function(a){if(f.deleteRuleFor(a),b.has(e,a)){var c=a+"{ "+b.map(e[a],function(a,b){return b+":"+a+";"}).join(" ")+"}";d.insertRule(c)}},add:function(a,d,g,h){b.has(e,a)||(e[a]={}),void 0==g||null==g||""==g?delete e[a][d]:e[a][d]=g,0==b.keys(e[a]).length&&delete e[a],h||(h=0),c(function(){f.writeRule(a)},h)},remove:function(a,b,c){f.add(a,b,null,c)},deleteRuleFor:function(a){b(d.rules).forEach(function(b,c){b.selectorText==a&&d.deleteRule(c)})},appViewSize:null};return a.$on("$smartContentResize",function(a,b){f.appViewSize=b}),f}])});
-define('dashboard/module',["angular","angular-couch-potato","angular-ui-router","angular-resource"],function(a,b){var c=a.module("app.dashboard",["ui.router","ngResource"]);return c.config(["$stateProvider","$couchPotatoProvider",function(a,b){a.state("app.dashboard",{url:"/dashboard",views:{"content@app":{controller:"DashboardCtrl",templateUrl:"build/dashboard/dashboard.html",resolve:{deps:b.resolveDependencies(["dashboard/DashboardCtrl"])}}},data:{title:"Dashboard"}})}]),b.configureApp(c),c.run(["$couchPotato",function(a){c.lazy=a}]),c});
-define('components/language/Language',["app"],function(a){return a.factory("Language",["$http",function(a){function b(b,c){a.get("api/langs/"+b+".json").success(function(a){c(a)}).error(function(){$log.log("Error"),c([])})}function c(b){a.get("api/languages.json").success(function(a){b(a)}).error(function(){$log.log("Error"),b([])})}return{getLang:function(a,c){b(a,c)},getLanguages:function(a){c(a)}}}])});
-define('components/language/languageSelector',["app"],function(a){a.registerDirective("languageSelector",["Language",function(){return{restrict:"EA",replace:!0,templateUrl:"build/components/language/language-selector.tpl.html",scope:!0}}])});
-define('components/language/language-controller',["app"],function(a){function b(a,b,c,d){b.lang={},d.getLanguages(function(a){b.currentLanguage=a[0],b.languages=a,d.getLang(a[0].key,function(a){b.lang=a})}),a.selectLanguage=function(a){b.currentLanguage=a,d.getLang(a.key,function(a){b.lang=a})},b.getWord=function(a){return angular.isDefined(b.lang[a])?b.lang[a]:a}}return b.$inject=["$scope","$rootScope","$log","Language"],a.controller("LanguagesCtrl",b)});
-define('smart-templates',["angular"],function(){angular.module("smart-templates",[]).run(["$templateCache",function(a){a.put("build/auth/directives/login-info.tpl.html",'<div class="login-info ng-cloak">\n    <span> <!-- User image size is adjusted inside CSS, it should stay as it -->\n        <a  href="">\n            <img ng-src="{{user.picture}}" alt="me" class="online">\n                <span>{{user.username}}\n                </span>\n            <i class="fa fa-angle-down"></i>\n        </a>\n     </span>\n</div>\n'),a.put("build/components/language/language-selector.tpl.html",'<ul class="header-dropdown-list hidden-xs ng-cloak" ng-controller="LanguagesCtrl">\n    <li class="dropdown">\n        <a class="dropdown-toggle" href> <img src="styles/img/blank.gif" class="flag flag-{{currentLanguage.key}}" alt="{{currentLanguage.alt}}"> <span> {{currentLanguage.title}} </span>\n            <i class="fa fa-angle-down"></i> </a>\n        <ul class="dropdown-menu pull-right">\n            <li ng-class="{active: language==currentLanguage}" ng-repeat="language in languages">\n                <a ng-click="selectLanguage(language)" ><img src="styles/img/blank.gif" class="flag flag-{{language.key}}"\n                                                   alt="{{language.alt}}"> {{language.title}}</a>\n            </li>\n        </ul>\n    </li>\n</ul>'),a.put("build/dashboard/live-feeds.tpl.html",'<div jarvis-widget id="live-feeds-widget" data-widget-togglebutton="false" data-widget-editbutton="false"\n     data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">\n<!-- widget options:\nusage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">\n\ndata-widget-colorbutton="false"\ndata-widget-editbutton="false"\ndata-widget-togglebutton="false"\ndata-widget-deletebutton="false"\ndata-widget-fullscreenbutton="false"\ndata-widget-custombutton="false"\ndata-widget-collapsed="true"\ndata-widget-sortable="false"\n\n-->\n<header>\n    <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>\n\n    <h2>Live Feeds </h2>\n\n    <ul class="nav nav-tabs pull-right in" id="myTab">\n        <li class="active">\n            <a data-toggle="tab" href="#s1"><i class="fa fa-clock-o"></i> <span class="hidden-mobile hidden-tablet">Live Stats</span></a>\n        </li>\n\n        <li>\n            <a data-toggle="tab" href="#s2"><i class="fa fa-facebook"></i> <span class="hidden-mobile hidden-tablet">Social Network</span></a>\n        </li>\n\n        <li>\n            <a data-toggle="tab" href="#s3"><i class="fa fa-dollar"></i> <span class="hidden-mobile hidden-tablet">Revenue</span></a>\n        </li>\n    </ul>\n\n</header>\n\n<!-- widget div-->\n<div class="no-padding">\n\n    <div class="widget-body">\n        <!-- content -->\n        <div id="myTabContent" class="tab-content">\n            <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">\n                <div class="row no-space">\n                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">\n														<span class="demo-liveupdate-1"> <span\n                                                                class="onoffswitch-title">Live switch</span> <span\n                                                                class="onoffswitch">\n																<input type="checkbox" name="start_interval" ng-model="autoUpdate"\n                                                                       class="onoffswitch-checkbox" id="start_interval">\n																<label class="onoffswitch-label" for="start_interval">\n                                                                    <span class="onoffswitch-inner"\n                                                                          data-swchon-text="ON"\n                                                                          data-swchoff-text="OFF"></span>\n                                                                    <span class="onoffswitch-switch"></span>\n                                                                </label> </span> </span>\n\n                        <div id="updating-chart" class="chart-large txt-color-blue" flot-basic flot-data="liveStats" flot-options="liveStatsOptions"></div>\n\n                    </div>\n                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">\n\n                        <div class="row">\n                            <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"><span class="text"> My Tasks <span\n                                    class="pull-right">130/200</span> </span>\n\n                                <div class="progress">\n                                    <div class="progress-bar bg-color-blueDark" style="width: 65%;"></div>\n                                </div>\n                            </div>\n                            <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"><span class="text"> Transfered <span\n                                    class="pull-right">440 GB</span> </span>\n\n                                <div class="progress">\n                                    <div class="progress-bar bg-color-blue" style="width: 34%;"></div>\n                                </div>\n                            </div>\n                            <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"><span class="text"> Bugs Squashed<span\n                                    class="pull-right">77%</span> </span>\n\n                                <div class="progress">\n                                    <div class="progress-bar bg-color-blue" style="width: 77%;"></div>\n                                </div>\n                            </div>\n                            <div class="col-xs-6 col-sm-6 col-md-12 col-lg-12"><span class="text"> User Testing <span\n                                    class="pull-right">7 Days</span> </span>\n\n                                <div class="progress">\n                                    <div class="progress-bar bg-color-greenLight" style="width: 84%;"></div>\n                                </div>\n                            </div>\n\n                            <span class="show-stat-buttons"> <span class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> <a\n                                    href-void class="btn btn-default btn-block hidden-xs">Generate PDF</a> </span> <span\n                                    class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> <a href-void\n                                                                                     class="btn btn-default btn-block hidden-xs">Report\n                                a bug</a> </span> </span>\n\n                        </div>\n\n                    </div>\n                </div>\n\n                <div class="show-stat-microcharts" data-sparkline-container data-easy-pie-chart-container>\n                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">\n\n                        <div class="easy-pie-chart txt-color-orangeDark" data-percent="33" data-pie-size="50">\n                            <span class="percent percent-sign">35</span>\n                        </div>\n                        <span class="easy-pie-title"> Server Load <i class="fa fa-caret-up icon-color-bad"></i> </span>\n                        <ul class="smaller-stat hidden-sm pull-right">\n                            <li>\n                                <span class="label bg-color-greenLight"><i class="fa fa-caret-up"></i> 97%</span>\n                            </li>\n                            <li>\n                                <span class="label bg-color-blueLight"><i class="fa fa-caret-down"></i> 44%</span>\n                            </li>\n                        </ul>\n                        <div class="sparkline txt-color-greenLight hidden-sm hidden-md pull-right"\n                             data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="70px"\n                             data-fill-color="transparent">\n                            130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247\n                        </div>\n                    </div>\n                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">\n                        <div class="easy-pie-chart txt-color-greenLight" data-percent="78.9" data-pie-size="50">\n                            <span class="percent percent-sign">78.9 </span>\n                        </div>\n                        <span class="easy-pie-title"> Disk Space <i class="fa fa-caret-down icon-color-good"></i></span>\n                        <ul class="smaller-stat hidden-sm pull-right">\n                            <li>\n                                <span class="label bg-color-blueDark"><i class="fa fa-caret-up"></i> 76%</span>\n                            </li>\n                            <li>\n                                <span class="label bg-color-blue"><i class="fa fa-caret-down"></i> 3%</span>\n                            </li>\n                        </ul>\n                        <div class="sparkline txt-color-blue hidden-sm hidden-md pull-right" data-sparkline-type="line"\n                             data-sparkline-height="33px" data-sparkline-width="70px" data-fill-color="transparent">\n                            257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247\n                        </div>\n                    </div>\n                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">\n                        <div class="easy-pie-chart txt-color-blue" data-percent="23" data-pie-size="50">\n                            <span class="percent percent-sign">23 </span>\n                        </div>\n                        <span class="easy-pie-title"> Transfered <i class="fa fa-caret-up icon-color-good"></i></span>\n                        <ul class="smaller-stat hidden-sm pull-right">\n                            <li>\n                                <span class="label bg-color-darken">10GB</span>\n                            </li>\n                            <li>\n                                <span class="label bg-color-blueDark"><i class="fa fa-caret-up"></i> 10%</span>\n                            </li>\n                        </ul>\n                        <div class="sparkline txt-color-darken hidden-sm hidden-md pull-right"\n                             data-sparkline-type="line" data-sparkline-height="33px" data-sparkline-width="70px"\n                             data-fill-color="transparent">\n                            200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270\n                        </div>\n                    </div>\n                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">\n                        <div class="easy-pie-chart txt-color-darken" data-percent="36" data-pie-size="50">\n                            <span class="percent degree-sign">36 <i class="fa fa-caret-up"></i></span>\n                        </div>\n                        <span class="easy-pie-title"> Temperature <i\n                                class="fa fa-caret-down icon-color-good"></i></span>\n                        <ul class="smaller-stat hidden-sm pull-right">\n                            <li>\n                                <span class="label bg-color-red"><i class="fa fa-caret-up"></i> 124</span>\n                            </li>\n                            <li>\n                                <span class="label bg-color-blue"><i class="fa fa-caret-down"></i> 40 F</span>\n                            </li>\n                        </ul>\n                        <div class="sparkline txt-color-red hidden-sm hidden-md pull-right" data-sparkline-type="line"\n                             data-sparkline-height="33px" data-sparkline-width="70px" data-fill-color="transparent">\n                            2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <!-- end s1 tab pane -->\n\n            <div class="tab-pane fade" id="s2">\n                <div class="widget-body-toolbar bg-color-white">\n\n                    <form class="form-inline" role="form">\n\n                        <div class="form-group">\n                            <label class="sr-only" for="s123">Show From</label>\n                            <input type="email" class="form-control input-sm" id="s123" placeholder="Show From">\n                        </div>\n                        <div class="form-group">\n                            <input type="email" class="form-control input-sm" id="s124" placeholder="To">\n                        </div>\n\n                        <div class="btn-group hidden-phone pull-right">\n                            <a class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown"><i\n                                    class="fa fa-cog"></i> More <span class="caret"> </span> </a>\n                            <ul class="dropdown-menu pull-right">\n                                <li>\n                                    <a href-void><i class="fa fa-file-text-alt"></i> Export to PDF</a>\n                                </li>\n                                <li>\n                                    <a href-void><i class="fa fa-question-sign"></i> Help</a>\n                                </li>\n                            </ul>\n                        </div>\n\n                    </form>\n\n                </div>\n                <div class="padding-10">\n                    <div id="statsChart" class="chart-large has-legend-unique" flot-basic flot-data="statsData" flot-options="statsDisplayOptions"></div>\n                </div>\n\n            </div>\n            <!-- end s2 tab pane -->\n\n            <div class="tab-pane fade" id="s3">\n\n                <div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">\n\n                    <div class="inline-group">\n\n                        <label for="gra-0" class="checkbox">\n                            <input type="checkbox" id="gra-0" ng-model="targetsShow">\n                            <i></i> Target </label>\n                        <label for="gra-1" class="checkbox">\n                            <input type="checkbox" id="gra-1" ng-model="actualsShow">\n                            <i></i> Actual </label>\n                        <label for="gra-2" class="checkbox">\n                            <input type="checkbox" id="gra-2" ng-model="signupsShow">\n                            <i></i> Signups </label>\n                    </div>\n\n                    <div class="btn-group hidden-phone pull-right">\n                        <a class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown"><i\n                                class="fa fa-cog"></i> More <span class="caret"> </span> </a>\n                        <ul class="dropdown-menu pull-right">\n                            <li>\n                                <a href-void><i class="fa fa-file-text-alt"></i> Export to PDF</a>\n                            </li>\n                            <li>\n                                <a href-void><i class="fa fa-question-sign"></i> Help</a>\n                            </li>\n                        </ul>\n                    </div>\n\n                </div>\n\n                <div class="padding-10">\n                    <div id="flotcontainer" class="chart-large has-legend-unique" flot-basic flot-data="revenewData" flot-options="revenewDisplayOptions"></div>\n                </div>\n            </div>\n            <!-- end s3 tab pane -->\n        </div>\n\n        <!-- end content -->\n    </div>\n\n</div>\n<!-- end widget div -->\n</div>\n'),a.put("build/layout/layout.tpl.html",'<!-- HEADER -->\n<div data-smart-include="build/layout/partials/header.tpl.html" class="placeholder-header"></div>\n<!-- END HEADER -->\n\n\n<!-- Left panel : Navigation area -->\n<!-- Note: This width of the aside area can be adjusted through LESS variables -->\n<div data-smart-include="build/layout/partials/navigation.tpl.html" class="placeholder-left-panel"></div>\n\n<!-- END NAVIGATION -->\n\n<!-- MAIN PANEL -->\n<div id="main" role="main">\n\n    <!-- RIBBON -->\n    <div id="ribbon">\n\n        <!-- breadcrumb -->\n        <state-breadcrumbs></state-breadcrumbs>\n        <!-- end breadcrumb -->\n\n    </div>\n    <!-- END RIBBON -->\n\n\n    <div data-smart-router-animation-wrap="content content@app" data-wrap-for="#content">\n        <div data-ui-view="content" data-autoscroll="false"></div>\n    </div>\n\n</div>\n<!-- END MAIN PANEL -->\n\n<!-- PAGE FOOTER -->\n<div data-smart-include="build/layout/partials/footer.tpl.html"></div>\n\n<!-- END PAGE FOOTER -->\n\n\n'),a.put("build/layout/partials/footer.tpl.html",'<div class="page-footer">\n    <div class="row">\n        <div class="col-xs-12 col-sm-6">\n            <span class="txt-color-white">SmartAdmin WebApp © 2013-2014</span>\n        </div>\n\n        <div class="col-xs-6 col-sm-6 text-right hidden-xs">\n            <div class="txt-color-white inline-block">\n                <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i>\n                    <strong>52 mins ago &nbsp;</strong> </i>\n\n                <div class="btn-group dropup">\n                    <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">\n                        <i class="fa fa-link"></i> <span class="caret"></span>\n                    </button>\n                    <ul class="dropdown-menu pull-right text-left">\n                        <li>\n                            <div class="padding-5">\n                                <p class="txt-color-darken font-sm no-margin">Download Progress</p>\n\n                                <div class="progress progress-micro no-margin">\n                                    <div class="progress-bar progress-bar-success" style="width: 50%;"></div>\n                                </div>\n                            </div>\n                        </li>\n                        <li class="divider"></li>\n                        <li>\n                            <div class="padding-5">\n                                <p class="txt-color-darken font-sm no-margin">Server Load</p>\n\n                                <div class="progress progress-micro no-margin">\n                                    <div class="progress-bar progress-bar-success" style="width: 20%;"></div>\n                                </div>\n                            </div>\n                        </li>\n                        <li class="divider"></li>\n                        <li>\n                            <div class="padding-5">\n                                <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span>\n                                </p>\n\n                                <div class="progress progress-micro no-margin">\n                                    <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>\n                                </div>\n                            </div>\n                        </li>\n                        <li class="divider"></li>\n                        <li>\n                            <div class="padding-5">\n                                <button class="btn btn-block btn-default">refresh</button>\n                            </div>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>'),a.put("build/layout/partials/header.tpl.html",'<header id="header">\n<div id="logo-group">\n\n    <!-- PLACE YOUR LOGO HERE -->\n    <span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"> </span>\n    <!-- END LOGO PLACEHOLDER -->\n</div>\n\n\n<!-- pulled right: nav area -->\n<div class="pull-right">\n\n    <!-- collapse menu button -->\n    <div id="hide-menu" class="btn-header pull-right">\n        <span> <a toggle-menu title="Collapse Menu"><i\n                class="fa fa-reorder"></i></a> </span>\n    </div>\n    <!-- end collapse menu -->\n\n    <!-- #MOBILE -->\n\n    <!-- logout button -->\n    <div id="logout" class="btn-header transparent pull-right">\n        <span> <a ui-sref="login" title="Sign Out" data-action="userLogout"\n                  data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i\n                class="fa fa-sign-out"></i></a> </span>\n    </div>\n    <!-- end logout button -->\n\n    <!-- fullscreen button -->\n    <div id="fullscreen" class="btn-header transparent pull-right">\n        <span> <a full-screen title="Full Screen"><i\n                class="fa fa-arrows-alt"></i></a> </span>\n    </div>\n    <!-- end fullscreen button -->\n\n    <!-- #Voice Command: Start Speech -->\n    <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">\n        <div>\n            <a title="Voice Command" id="voice-command-btn" speech-recognition><i class="fa fa-microphone"></i></a>\n\n            <div class="popover bottom">\n                <div class="arrow"></div>\n                <div class="popover-content">\n                    <h4 class="vc-title">Voice command activated <br>\n                        <small>Please speak clearly into the mic</small>\n                    </h4>\n                    <h4 class="vc-title-error text-center">\n                        <i class="fa fa-microphone-slash"></i> Voice command failed\n                        <br>\n                        <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>\n                        <br>\n                        <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>\n                    </h4>\n                    <a href-void class="btn btn-success" id="speech-help-btn">See Commands</a>\n                    <a href-void class="btn bg-color-purple txt-color-white"\n                       onclick="$(\'#speech-btn .popover\').fadeOut(50);">Close Popup</a>\n                </div>\n            </div>\n        </div>\n    </div>\n    <!-- end voice command -->\n\n\n\n    <!-- multiple lang dropdown : find all flags in the flags page -->\n    <language-selector></language-selector>\n    <!-- end multiple lang -->\n\n</div>\n<!-- end pulled right: nav area -->\n\n</header>\n'),a.put("build/layout/partials/navigation.tpl.html",'<aside id="left-panel">\n\n    <!-- User info -->\n    <div login-info></div>\n    <!-- end user info -->\n\n    <!-- NAVIGATION : This navigation is also responsive\n\n    To make this navigation dynamic please make sure to link the node\n    (the reference to the nav > ul) after page load. Or the navigation\n    will not initialize.\n    -->\n    <nav>\n        <!-- NOTE: Notice the gaps after each icon usage <i></i>..\n        Please note that these links work a bit different than\n        traditional href="" links. See documentation for details.\n        -->\n\n        <ul data-smart-menu>\n            <li data-ui-sref-active="active">\n                <a data-ui-sref="app.dashboard" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span\n                        class="menu-item-parent">{{getWord(\'Dashboard\')}}</span></a>\n            </li>\n        </ul>\n    </nav>\n\n  <span class="minifyme" data-action="minifyMenu" minify-menu>\n    <i class="fa fa-arrow-circle-left hit"></i>\n  </span>\n\n</aside>\n'),a.put("build/layout/partials/sub-header.tpl.html",'<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8" data-sparkline-container>\n    <ul id="sparks" class="">\n        <li class="sparks-info">\n            <h5> My Income <span class="txt-color-blue">$47,171</span></h5>\n            <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">\n                1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471\n            </div>\n        </li>\n        <li class="sparks-info">\n            <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up"></i>&nbsp;45%</span></h5>\n            <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">\n                110,150,300,130,400,240,220,310,220,300, 270, 210\n            </div>\n        </li>\n        <li class="sparks-info">\n            <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>\n            <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">\n                110,150,300,130,400,240,220,310,220,300, 270, 210\n            </div>\n        </li>\n    </ul>\n</div>\n			'),a.put("build/layout/partials/voice-commands.tpl.html",'<!-- TRIGGER BUTTON:\n<a href="/my-ajax-page.html" data-toggle="modal" data-target="#remoteModal" class="btn btn-default">Open Modal</a>  -->\n\n<!-- MODAL PLACE HOLDER\n<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">\n<div class="modal-dialog">\n<div class="modal-content"></div>\n</div>\n</div>   -->\n<!--////////////////////////////////////-->\n\n<!--<div class="modal-header">\n<button type="button" class="close" data-dismiss="modal" aria-hidden="true">\n&times;\n</button>\n<h4 class="modal-title" id="myModalLabel">Command List</h4>\n</div>-->\n<div class="modal-body">\n\n	<h1><i class="fa fa-microphone text-muted"></i>&nbsp;&nbsp; SmartAdmin Voice Command</h1>\n	<hr class="simple">\n	<h5>Instruction</h5>\n\n	Click <span class="text-success">"Allow"</span> to access your microphone and activate Voice Command.\n	You will notice a <span class="text-primary"><strong>BLUE</strong> Flash</span> on the microphone icon indicating activation.\n	The icon will appear <span class="text-danger"><strong>RED</strong></span> <span class="label label-danger"><i class="fa fa-microphone fa-lg"></i></span> if you <span class="text-danger">"Deny"</span> access or don\'t have any microphone installed.\n	<br>\n	<br>\n	As a security precaution, your browser will disconnect the microphone every 60 to 120 seconds (sooner if not being used). In which case Voice Command will prompt you again to <span class="text-success">"Allow"</span> or <span class="text-danger">"Deny"</span> access to your microphone.\n	<br>\n	<br>\n	If you host your page over <strong>http<span class="text-success">s</span></strong> (secure socket layer) protocol you can wave this security measure and have an unintrupted Voice Command.\n	<br>\n	<br>\n	<h5>Commands</h5>\n	<ul>\n		<li>\n			<strong>\'show\' </strong> then say the <strong>*page*</strong> you want to go to. For example <strong>"show inbox"</strong> or <strong>"show calendar"</strong>\n		</li>\n		<li>\n			<strong>\'mute\' </strong> - mutes all sound effects for the theme.\n		</li>\n		<li>\n			<strong>\'sound on\'</strong> - unmutes all sound effects for the theme.\n		</li>\n		<li>\n			<span class="text-danger"><strong>\'stop\'</strong></span> - deactivates voice command.\n		</li>\n		<li>\n			<span class="text-primary"><strong>\'help\'</strong></span> - brings up the command list\n		</li>\n		<li>\n			<span class="text-danger"><strong>\'got it\'</strong></span> - closes help modal\n		</li>\n		<li>\n			<strong>\'hide navigation\'</strong> - toggle navigation collapse\n		</li>\n		<li>\n			<strong>\'show navigation\'</strong> - toggle navigation to open (can be used again to close)\n		</li>\n		<li>\n			<strong>\'scroll up\'</strong> - scrolls to the top of the page\n		</li>\n		<li>\n			<strong>\'scroll down\'</strong> - scrollts to the bottom of the page\n		</li>\n		<li>\n			<strong>\'go back\' </strong> - goes back in history (history -1 click)\n		</li>\n		<li>\n			<strong>\'logout\'</strong> - logs you out\n		</li>\n	</ul>\n	<br>\n	<h5>Adding your own commands</h5>\n	Voice Command supports up to 80 languages. Adding your own commands is extreamly easy. All commands are stored inside <strong>app.config.js</strong> file under the <code>var commands = {...}</code>. \n\n	<hr class="simple">\n	<div class="text-right">\n		<button type="button" class="btn btn-success btn-lg" data-dismiss="modal">\n			Got it!\n		</button>\n	</div>\n\n</div>\n<!--<div class="modal-footer">\n<button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>\n</div> -->')}])});
-define('includes',["auth/module","auth/models/User","layout/module","layout/actions/minifyMenu","layout/actions/toggleMenu","layout/actions/fullScreen","layout/actions/resetWidgets","layout/actions/resetWidgets","layout/actions/searchMobile","layout/directives/smartInclude","layout/directives/smartDeviceDetect","layout/directives/smartFastClick","layout/directives/smartLayout","layout/directives/smartSpeech","layout/directives/smartRouterAnimationWrap","layout/directives/smartFitAppView","layout/directives/radioToggle","layout/directives/dismisser","layout/directives/smartMenu","layout/directives/bigBreadcrumbs","layout/directives/stateBreadcrumbs","layout/directives/smartPageTitle","layout/directives/hrefVoid","layout/service/SmartCss","dashboard/module","components/language/Language","components/language/languageSelector","components/language/language-controller","smart-templates"],function(){"use strict"});
-window.name="NG_DEFER_BOOTSTRAP!",define('main',["require","jquery","angular","domReady","bootstrap","appConfig","app","includes"],function(a,b,c,d){b.sound_path=appConfig.sound_path,b.sound_on=appConfig.sound_on,d(function(a){c.bootstrap(a,["app"]),c.resumeBootstrap()})});

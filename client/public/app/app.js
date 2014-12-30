@@ -11,32 +11,32 @@
 
 define([
     'angular',
-    'angular-couch-potato',
     'angular-ui-router',
     'angular-animate',
     'angular-bootstrap',
     'angular-sanitize', // http://myorange.ca/supportforum/question/how-to-completely-remove-chat-module-in-angularjs-version
-    'notification'
-], function (ng, couchPotato) {
+    'ocLazyLoad' //,
+    //'notification'
+], function (angular) {
 
-    var app = ng.module('app', [
+    var app = angular.module('app', [
         'ngSanitize',
-
-        'scs.couch-potato',
+        'oc.lazyLoad',
         'ngAnimate',
         'ui.router',
-        'ui.bootstrap',
+        'ui.bootstrap'
         // App
-        'app.auth',
-        'app.layout',
-        'app.dashboard'
+        //'app.auth',
+        //'app.layout',
+        //'app.dashboard'
     ]);
 
-    couchPotato.configureApp(app);
+    app.config(function ($provide, $httpProvider, $ocLazyLoadProvider) {
 
-    app.config(function ($provide, $httpProvider) {
-
-
+        $ocLazyLoadProvider.config({
+          jsLoader: requirejs,
+          debug: true
+        });
 
         // Intercept http calls.
         $provide.factory('ErrorHttpInterceptor', function ($q) {
@@ -78,8 +78,7 @@ define([
 
     });
 
-    app.run(function ($couchPotato, $rootScope, $state, $stateParams) {
-        app.lazy = $couchPotato;
+    app.run(function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         // editableOptions.theme = 'bs3';

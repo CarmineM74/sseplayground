@@ -1,1 +1,169 @@
-define(["layout/module","lodash"],function(a,b){"use strict";a.registerDirective("smartLayout",["$rootScope","$timeout","$interval","$q","SmartCss",function(a,c,d,e){var f=!1,g=e.defer();g.promise.then(function(){f=!0});var h,i,j,k,l=$(window),m=($(document),$("html")),n=$("body");return function o(){h=$("#header"),i=$("#left-panel"),j=$("#ribbon"),k=$(".page-footer"),b.every([h,i,j,k],function(a){return angular.isNumber(a.height())})?g.resolve():c(o,100)}(),{priority:2014,restrict:"A",compile:function(e){function o(){var b=n.hasClass("menu-on-top")&&i.is(":visible")?i.height():0,c=!n.hasClass("menu-on-top")&&i.is(":visible")?i.width()+i.offset().left:0,d=$("#content"),e=d.outerWidth(!0)-d.width(),f=d.outerHeight(!0)-d.height();u=l.width()-c-e,v=l.height()-b-f-h.height()-j.height()-k.height(),w=z-u,x=y-v,(Math.abs(w)||Math.abs(x)||A)&&(a.$broadcast("$smartContentResize",{width:u,height:v,deltaX:w,deltaY:x}),z=u,y=v,A=!1)}function p(a){g.promise.then(function(){r(a)})}function q(){B=!1}function r(a){c(function(){B=!0},a)}function s(){n.toggleClass("mobile-view-activated",l.width()<979),l.width()<979&&n.removeClass("minified"),o()}function t(a){a.data&&a.data.htmlId?m.attr("id",a.data.htmlId):m.removeAttr("id")}e.removeAttr("smart-layout data-smart-layout");var u,v,w,x,y=0,z=0,A=!1,B=!1;d(function(){B&&s()},300);var C=b.debounce(function(){p(300)},300);p(10),a.$on("$stateChangeStart",function(a,b){t(b),q()});var D=1;a.$on("$viewContentLoading",function(){D++}),a.$on("$stateChangeSuccess",function(){A=!0}),a.$on("$viewContentLoaded",function(){D--,0==D&&f&&C()})}}}])});
+define(['layout/module', 'lodash'], function (module, _) {
+
+    'use strict';
+
+    var _debug = 0;
+
+    function getDocHeight() {
+        var D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
+    }
+
+
+    module.registerDirective('smartLayout', ["$rootScope", "$timeout", "$interval", "$q", "SmartCss", function ($rootScope, $timeout, $interval, $q, SmartCss) {
+
+        var initialized = false, initializedResolver = $q.defer();
+        initializedResolver.promise.then(function () {
+            initialized = true;
+        });
+
+        var $window = $(window),
+            $document = $(document),
+            $html = $('html'),
+            $body = $('body'),
+            $navigation ,
+            $menu,
+            $ribbon,
+            $footer,
+            $contentAnimContainer;
+
+
+        (function cacheElements() {
+            $navigation = $('#header');
+            $menu = $('#left-panel');
+            $ribbon = $('#ribbon');
+            $footer = $('.page-footer');
+            if (_.every([$navigation, $menu, $ribbon, $footer], function ($it) {
+                return angular.isNumber($it.height())
+            })) {
+                initializedResolver.resolve();
+            } else {
+                $timeout(cacheElements, 100);
+            }
+        })();
+
+
+        return {
+            priority: 2014,
+            restrict: 'A',
+            compile: function (tElement, tAttributes) {
+                tElement.removeAttr('smart-layout data-smart-layout');
+
+                var appViewHeight = 0 ,
+                    appViewWidth = 0,
+                    calcWidth,
+                    calcHeight,
+                    deltaX,
+                    deltaY;
+
+                var forceResizeTrigger = false;
+
+                function resizeListener() {
+
+//                    full window height appHeight = Math.max($menu.outerHeight() - 10, getDocHeight() - 10);
+
+                    var menuHeight = $body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.height() : 0;
+                    var menuWidth = !$body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.width() + $menu.offset().left : 0;
+
+                    var $content = $('#content');
+                    var contentXPad = $content.outerWidth(true) - $content.width();
+                    var contentYPad = $content.outerHeight(true) - $content.height();
+
+
+                    calcWidth = $window.width() - menuWidth - contentXPad;
+                    calcHeight = $window.height() - menuHeight - contentYPad - $navigation.height() - $ribbon.height() - $footer.height();
+
+                    deltaX = appViewWidth - calcWidth;
+                    deltaY = appViewHeight - calcHeight;
+                    if (Math.abs(deltaX) || Math.abs(deltaY) || forceResizeTrigger) {
+
+                        //console.log('exec', calcWidth, calcHeight);
+                        $rootScope.$broadcast('$smartContentResize', {
+                            width: calcWidth,
+                            height: calcHeight,
+                            deltaX: deltaX,
+                            deltaY: deltaY
+                        });
+                        appViewWidth = calcWidth;
+                        appViewHeight = calcHeight;
+                        forceResizeTrigger = false;
+                    }
+                }
+
+
+                var looping = false;
+                $interval(function () {
+                    if (looping) loop();
+                }, 300);
+
+                var debouncedRun = _.debounce(function () {
+                    run(300)
+                }, 300);
+
+                function run(delay) {
+                    initializedResolver.promise.then(function () {
+                        attachOnResize(delay);
+                    });
+                }
+
+                run(10);
+
+                function detachOnResize() {
+                    looping = false;
+                }
+
+                function attachOnResize(delay) {
+                    $timeout(function () {
+                        looping = true;
+                    }, delay);
+                }
+
+                function loop() {
+                    $body.toggleClass('mobile-view-activated', $window.width() < 979);
+
+                    if ($window.width() < 979)
+                        $body.removeClass('minified');
+
+                    resizeListener();
+                }
+
+                function handleHtmlId(toState) {
+                    if (toState.data && toState.data.htmlId) $html.attr('id', toState.data.htmlId);
+                    else $html.removeAttr('id');
+                }
+
+                $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                    //console.log(1, '$stateChangeStart', event, toState, toParams, fromState, fromParams);
+
+                    handleHtmlId(toState);
+                    detachOnResize();
+                });
+
+                // initialized with 1 cause we came here with one $viewContentLoading request
+                var viewContentLoading = 1;
+                $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
+                    //console.log(2, '$viewContentLoading', event, viewConfig);
+                    viewContentLoading++;
+                });
+
+                $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+                    //console.log(3, '$stateChangeSuccess', event, toState, toParams, fromState, fromParams);
+                    forceResizeTrigger = true;
+                });
+
+                $rootScope.$on('$viewContentLoaded', function (event) {
+                    //console.log(4, '$viewContentLoaded', event);
+                    viewContentLoading--;
+
+                    if (viewContentLoading == 0 && initialized) {
+                        debouncedRun();
+                    }
+                });
+            }
+        }
+    }]);
+});

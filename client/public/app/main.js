@@ -9,10 +9,10 @@ define([
 
     //'pace',
     'bootstrap',
-    'appConfig',
-    'app',
-    'includes'
-], function (require, $, ng, domReady) {
+    //'appConfig',
+    'app'
+    //'includes'
+], function (require, $, angular, domReady) {
     'use strict';
 
     $.sound_path = appConfig.sound_path;
@@ -20,7 +20,7 @@ define([
 
 
     domReady(function (document) {
-        ng.bootstrap(document, ['app']);
-        ng.resumeBootstrap();
+        angular.bootstrap(document, ['app']);
+        angular.resumeBootstrap();
     });
 });

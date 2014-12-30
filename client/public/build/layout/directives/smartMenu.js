@@ -1,1 +1,102 @@
-define(["layout/module","jquery"],function(a){"use strict";!function(a){a.fn.smartCollapseToggle=function(){return this.each(function(){var b=a("body"),c=a(this);b.hasClass("menu-on-top")||(b.hasClass("mobile-view-activated"),c.toggleClass("open"),b.hasClass("minified")?c.closest("nav ul ul").length&&(c.find(">a .collapse-sign .fa").toggleClass("fa-minus-square-o fa-plus-square-o"),c.find("ul:first").slideToggle(appConfig.menu_speed||200)):(c.find(">a .collapse-sign .fa").toggleClass("fa-minus-square-o fa-plus-square-o"),c.find("ul:first").slideToggle(appConfig.menu_speed||200)))})}}(jQuery),a.registerDirective("smartMenu",["$state","$rootScope",function(a,b){return{restrict:"A",link:function(a,c){var d=$("body"),e=c.find("li[data-menu-collapse]");e.each(function(a,b){var c=$(b);c.on("click",">a",function(a){c.siblings(".open").smartCollapseToggle(),c.smartCollapseToggle(),!c.hasClass("open")&&c.find("li.active").length>0&&c.addClass("active"),a.preventDefault()}).find(">a").append('<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>'),c.find("li.active").length&&(c.smartCollapseToggle(),c.find("li.active").parents("li").addClass("active"))}),c.on("click","a[data-ui-sref]",function(){$(this).parents("li").addClass("active").each(function(){$(this).siblings("li.open").smartCollapseToggle(),$(this).siblings("li").removeClass("active")}),d.hasClass("mobile-view-activated")&&b.$broadcast("requestToggleMenu")}),a.$on("$smartLayoutMenuOnTop",function(a,b){b&&e.filter(".open").smartCollapseToggle()})}}}])});
+define(['layout/module', 'jquery'], function (module) {
+
+    "use strict";
+
+    (function ($) {
+
+        $.fn.smartCollapseToggle = function () {
+
+            return this.each(function () {
+
+                var $body = $('body');
+                var $this = $(this);
+
+                // only if not  'menu-on-top'
+                if ($body.hasClass('menu-on-top')) {
+
+
+                } else {
+
+                    $body.hasClass('mobile-view-activated')
+
+                    // toggle open
+                    $this.toggleClass('open');
+
+                    // for minified menu collapse only second level
+                    if ($body.hasClass('minified')) {
+                        if ($this.closest('nav ul ul').length) {
+                            $this.find('>a .collapse-sign .fa').toggleClass('fa-minus-square-o fa-plus-square-o');
+                            $this.find('ul:first').slideToggle(appConfig.menu_speed || 200);
+                        }
+                    } else {
+                        // toggle expand item
+                        $this.find('>a .collapse-sign .fa').toggleClass('fa-minus-square-o fa-plus-square-o');
+                        $this.find('ul:first').slideToggle(appConfig.menu_speed || 200);
+                    }
+                }
+            });
+        };
+    })(jQuery);
+
+    module.registerDirective('smartMenu', ["$state", "$rootScope", function ($state, $rootScope) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var $body = $('body');
+
+                var $collapsible = element.find('li[data-menu-collapse]');
+                $collapsible.each(function (idx, li) {
+                    var $li = $(li);
+                    $li
+                        .on('click', '>a', function (e) {
+
+                            // collapse all open siblings
+                            $li.siblings('.open').smartCollapseToggle();
+
+                            // toggle element
+                            $li.smartCollapseToggle();
+
+                            // add active marker to collapsed element if it has active childs
+                            if (!$li.hasClass('open') && $li.find('li.active').length > 0) {
+                                $li.addClass('active')
+                            }
+
+                            e.preventDefault();
+                        })
+                        .find('>a').append('<b class="collapse-sign"><em class="fa fa-plus-square-o"></em></b>');
+
+                    // initialization toggle
+                    if ($li.find('li.active').length) {
+                        $li.smartCollapseToggle();
+                        $li.find('li.active').parents('li').addClass('active');
+                    }
+                });
+
+                // click on route link
+                element.on('click', 'a[data-ui-sref]', function (e) {
+                    // collapse all siblings to element parents and remove active markers
+                    $(this)
+                        .parents('li').addClass('active')
+                        .each(function () {
+                            $(this).siblings('li.open').smartCollapseToggle();
+                            $(this).siblings('li').removeClass('active')
+                        });
+
+                    if ($body.hasClass('mobile-view-activated')) {
+                        $rootScope.$broadcast('requestToggleMenu');
+                    }
+                });
+
+
+                scope.$on('$smartLayoutMenuOnTop', function (event, menuOnTop) {
+                    if (menuOnTop) {
+                        $collapsible.filter('.open').smartCollapseToggle();
+                    }
+                });
+
+            }
+        }
+    }]);
+
+
+});

@@ -235,7 +235,7 @@ module.exports = function (grunt) {
         'html2js',
         'addIncludes',
         'coffee',                         // CarmineM74
-        'uglify',
+        //'uglify',
         'requirejs',
         'copy:post',
         'clean:post',
