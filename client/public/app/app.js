@@ -15,10 +15,10 @@ define([
     'angular-animate',
     'angular-bootstrap',
     'angular-sanitize', // http://myorange.ca/supportforum/question/how-to-completely-remove-chat-module-in-angularjs-version
-    'ocLazyLoad' //,
-    //'notification'
+    'ocLazyLoad',
+    'notification'
 ], function (angular) {
-
+    
     var app = angular.module('app', [
         'ngSanitize',
         'oc.lazyLoad',
@@ -37,6 +37,8 @@ define([
           jsLoader: requirejs,
           debug: true
         });
+
+        console.log('ocLazyLoad configured');
 
         // Intercept http calls.
         $provide.factory('ErrorHttpInterceptor', function ($q) {
