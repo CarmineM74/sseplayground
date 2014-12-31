@@ -287,8 +287,8 @@ define('app',[
 ], function (angular) {
     
     var app = angular.module('app', [
-        'ngSanitize',
         'oc.lazyLoad',
+        'ngSanitize',
         'ngAnimate',
         'ui.router',
         'ui.bootstrap'
@@ -369,7 +369,7 @@ define('main',[
     'bootstrap',
     'appConfig',
     'app'
-//    'includes'
+    //'includes'
 ], function (require, $, angular, domReady) {
     
 

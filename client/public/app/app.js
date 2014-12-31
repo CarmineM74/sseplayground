@@ -20,8 +20,8 @@ define([
 ], function (angular) {
     
     var app = angular.module('app', [
-        'ngSanitize',
         'oc.lazyLoad',
+        'ngSanitize',
         'ngAnimate',
         'ui.router',
         'ui.bootstrap'
