@@ -2,7 +2,7 @@ define(['auth/module'], function (module) {
 
     'use strict';
 
-   return module.registerFactory('User', ["$http", "$q", function ($http, $q) {
+   return module.registerFactory('User', function ($http, $q) {
         var dfd = $q.defer();
 
         var UserModel = {
@@ -17,6 +17,6 @@ define(['auth/module'], function (module) {
          });
 
         return UserModel;
-    }]);
+    });
 
 });

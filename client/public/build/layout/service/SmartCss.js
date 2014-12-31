@@ -2,7 +2,7 @@ define(['layout/module', 'lodash'], function (module, _) {
 
     'use strict';
 
-    module.registerFactory('SmartCss', ["$rootScope", "$timeout", function ($rootScope, $timeout) {
+    module.registerFactory('SmartCss', function ($rootScope, $timeout) {
 
         var sheet = (function () {
             // Create the <style> tag
@@ -73,7 +73,7 @@ define(['layout/module', 'lodash'], function (module, _) {
 
         return SmartCss;
 
-    }]);
+    });
 });
 
 

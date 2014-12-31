@@ -2,7 +2,7 @@ define(['layout/module'], function (module) {
 
     'use strict';
 
-    module.registerDirective('smartPageTitle', ["$rootScope", "$timeout", function ($rootScope, $timeout) {
+    module.registerDirective('smartPageTitle', function ($rootScope, $timeout) {
         return {
             restrict: 'A',
             compile: function (element, attributes) {
@@ -22,5 +22,5 @@ define(['layout/module'], function (module) {
 
             }
         }
-    }]);
+    });
 });

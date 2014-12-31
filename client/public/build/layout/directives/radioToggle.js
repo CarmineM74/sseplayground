@@ -7,7 +7,7 @@ define(['layout/module'], function (module) {
     * Source: https://gist.github.com/aeife/9374784
     */
 
-    module.registerDirective('radioToggle', ["$log", function ($log) {
+    module.registerDirective('radioToggle', function ($log) {
       return {
         scope: {
           model: "=ngModel",
@@ -21,5 +21,5 @@ define(['layout/module'], function (module) {
           });
         }
       }
-    }]);
+    });
 });

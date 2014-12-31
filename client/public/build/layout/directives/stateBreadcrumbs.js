@@ -2,7 +2,7 @@ define(['layout/module'], function (module) {
 
     'use strict';
 
-    module.registerDirective('stateBreadcrumbs', ["$rootScope", "$state", function ($rootScope, $state) {
+    module.registerDirective('stateBreadcrumbs', function ($rootScope, $state) {
 
 
         return {
@@ -52,5 +52,5 @@ define(['layout/module'], function (module) {
                 })
             }
         }
-    }]);
+    });
 });

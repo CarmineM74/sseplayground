@@ -2,7 +2,7 @@ define(['auth/module'], function (module) {
 
     "use strict";
 
-    return module.registerDirective('googleSignin', ["$rootScope", "GooglePlus", function ($rootScope, GooglePlus) {
+    return module.registerDirective('googleSignin', function ($rootScope, GooglePlus) {
         return {
             restrict: 'E',
             template: '<a class="g-signin btn btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i> Sign in with Google</a>',
@@ -19,5 +19,5 @@ define(['auth/module'], function (module) {
                 })
             }
         };
-    }]);
+    });
 });

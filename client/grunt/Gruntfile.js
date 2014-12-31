@@ -228,9 +228,9 @@ module.exports = function (grunt) {
         'clean:pre',
         'clean:rails',                    // CarmineM74
         'copy:pre',
-        'turnOffPotatoDeclaration',
+        //'turnOffPotatoDeclaration',
         'ngAnnotate:tmp',
-        'turnOnPotatoDeclaration',
+        //'turnOnPotatoDeclaration',
         'adjustTemplateUrls',
         'html2js',
         'addIncludes',

@@ -2,7 +2,7 @@ define(['layout/module', 'lodash'], function (module, _) {
 
     'use strict';
 
-    module.registerDirective('smartFitAppView', ["$rootScope", "SmartCss", function ($rootScope, SmartCss) {
+    module.registerDirective('smartFitAppView', function ($rootScope, SmartCss) {
         return {
             restrict: 'A',
             compile: function (element, attributes) {
@@ -30,5 +30,5 @@ define(['layout/module', 'lodash'], function (module, _) {
 
             }
         }
-    }]);
+    });
 });

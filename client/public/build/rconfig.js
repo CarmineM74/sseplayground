@@ -224,7 +224,7 @@ var require = {
 
         'notification': { deps: ['jquery']},
 
-        'smartwidgets': { deps: ['jquery-ui']}
+        'smartwidgets': { deps: ['jquery-ui']},
 
     },
     priority: [

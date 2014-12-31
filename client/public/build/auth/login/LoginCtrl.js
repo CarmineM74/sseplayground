@@ -2,7 +2,7 @@ define(['auth/module'], function (module) {
 
     "use strict";
 
-    module.registerController('LoginCtrl', ["$scope", "$state", "GooglePlus", "User", "ezfb", function ($scope, $state, GooglePlus, User, ezfb) {
+    module.registerController('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
 
         $scope.$on('event:google-plus-signin-success', function (event, authResult) {
             if (authResult.status.method == 'PROMPT') {
@@ -21,5 +21,5 @@ define(['auth/module'], function (module) {
                 $state.go('app.dashboard');
             });
         });
-    }])
+    })
 });

@@ -14,7 +14,7 @@ define(['layout/module', 'lodash'], function (module, _) {
     }
 
 
-    module.registerDirective('smartLayout', ["$rootScope", "$timeout", "$interval", "$q", "SmartCss", function ($rootScope, $timeout, $interval, $q, SmartCss) {
+    module.registerDirective('smartLayout', function ($rootScope, $timeout, $interval, $q, SmartCss) {
 
         var initialized = false, initializedResolver = $q.defer();
         initializedResolver.promise.then(function () {
@@ -165,5 +165,5 @@ define(['layout/module', 'lodash'], function (module, _) {
                 });
             }
         }
-    }]);
+    });
 });

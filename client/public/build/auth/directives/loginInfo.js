@@ -1,7 +1,7 @@
 define(['auth/module'], function(module){
     "use strict";
 
-    return module.registerDirective('loginInfo', ["User", function(User){
+    return module.registerDirective('loginInfo', function(User){
 
         return {
             restrict: 'A',
@@ -12,5 +12,5 @@ define(['auth/module'], function(module){
                 });
             }
         }
-    }])
+    })
 });

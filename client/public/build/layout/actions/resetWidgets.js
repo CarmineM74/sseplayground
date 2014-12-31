@@ -2,7 +2,7 @@ define(['layout/module'], function (module) {
 
     "use strict";
 
-    module.registerDirective('resetWidgets', ["$state", function($state){
+    module.registerDirective('resetWidgets', function($state){
 
         return {
             restrict: 'A',
@@ -23,6 +23,6 @@ define(['layout/module'], function (module) {
             }
         }
 
-    }])
+    })
 
 });

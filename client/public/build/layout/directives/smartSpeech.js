@@ -485,7 +485,7 @@ define(['layout/module', 'jquery'], function (module, $) {
 	}
 
 
-    module.registerDirective('speechRecognition', ["$log", function ($log) {
+    module.registerDirective('speechRecognition', function ($log) {
 
     	var link = function(scope, element) {
 
@@ -540,7 +540,7 @@ define(['layout/module', 'jquery'], function (module, $) {
             restrict: 'AE',
             link: link
         }
-    }]);
+    });
 
 
 

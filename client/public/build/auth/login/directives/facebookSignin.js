@@ -1,7 +1,7 @@
 define(['auth/module'], function (module) {
     "use strict";
 
-    return module.registerDirective('facebookSignin', ["$rootScope", "ezfb", function ($rootScope, ezfb) {
+    return module.registerDirective('facebookSignin', function ($rootScope, ezfb) {
         return {
             replace: true,
             restrict: 'E',
@@ -17,5 +17,5 @@ define(['auth/module'], function (module) {
 
             }
         }
-    }]);
+    });
 });

@@ -2,7 +2,7 @@ define(['layout/module'], function (module) {
 
     'use strict';
 
-    module.registerDirective('reloadState', ["$rootScope", function ($rootScope) {
+    module.registerDirective('reloadState', function ($rootScope) {
         return {
             restrict: 'A',
             compile: function (tElement, tAttributes) {
@@ -17,5 +17,5 @@ define(['layout/module'], function (module) {
                 })
             }
         }
-    }]);
+    });
 });

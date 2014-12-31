@@ -2,7 +2,7 @@ define(['layout/module', 'lodash'], function (module, _) {
 
     'use strict';
 
-    module.registerDirective('smartRouterAnimationWrap', ["$rootScope", "$timeout", function ($rootScope,$timeout) {
+    module.registerDirective('smartRouterAnimationWrap', function ($rootScope,$timeout) {
         return {
             restrict: 'A',
             compile: function (element, attributes) {
@@ -69,5 +69,5 @@ define(['layout/module', 'lodash'], function (module, _) {
 
             }
         }
-    }]);
+    });
 });

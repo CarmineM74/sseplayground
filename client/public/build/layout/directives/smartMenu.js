@@ -38,7 +38,7 @@ define(['layout/module', 'jquery'], function (module) {
         };
     })(jQuery);
 
-    module.registerDirective('smartMenu', ["$state", "$rootScope", function ($state, $rootScope) {
+    module.registerDirective('smartMenu', function ($state, $rootScope) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -96,7 +96,7 @@ define(['layout/module', 'jquery'], function (module) {
 
             }
         }
-    }]);
+    });
 
 
 });
