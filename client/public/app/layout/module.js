@@ -1,6 +1,6 @@
 define(['angular',
-    'angular-couch-potato',
-    'angular-ui-router'], function (ng, couchPotato) {
+    'ocLazyLoad',
+    'angular-ui-router'], function (ng, ocLazyLoad) {
 
     "use strict";
 
@@ -8,9 +8,7 @@ define(['angular',
     var module = ng.module('app.layout', ['ui.router']);
 
 
-    couchPotato.configureApp(module);
-
-    module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
+    module.config(function ($stateProvider, $ocLazyLoadProvider, $urlRouterProvider) {
 
 
         $stateProvider

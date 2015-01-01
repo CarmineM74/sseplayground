@@ -1,10 +1,10 @@
 define([
     'angular',
-    'angular-couch-potato',
+    'ocLazyLoad',
     'angular-ui-router',
     'angular-google-plus',
     'angular-easyfb'
-], function (ng, couchPotato) {
+], function (ng, ocLazyLoad) {
 
     "use strict";
 
@@ -15,14 +15,12 @@ define([
 //        'googleplus'
     ]);
 
-    couchPotato.configureApp(module);
-
     var authKeys = {
         googleClientId: '678402726462-ah1p6ug0klf9jm8cplefmphfupg3bg2h.apps.googleusercontent.com',
         facebookAppId: '620275558085318'
     };
 
-    module.config(function ($stateProvider, $couchPotatoProvider
+    module.config(function ($stateProvider, $ocLazyLoadProvider
 //        , ezfbProvider
 //        , GooglePlusProvider
         ) {
@@ -33,6 +31,7 @@ define([
 //        ezfbProvider.setInitParams({
 //            appId: authKeys.facebookAppId
 //        });
+
         $stateProvider.state('realLogin', {
             url: '/real-login',
 

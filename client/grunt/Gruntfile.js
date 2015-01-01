@@ -36,8 +36,8 @@ module.exports = function (grunt) {
             },
             expand: true,
             cwd: '.',
-            src: [ pub +  '/app/**/*.coffee', '!' + pub + '/app/**/*.spec.coffee' ],
-            dest: tmp,
+            src: [ '../public/tmp' +  '/**/*.coffee', '!' + '../public/tmp' + '/**/*.spec.coffee' ],
+            dest: '.',
             ext: '.js'
           }
         },
@@ -228,7 +228,7 @@ module.exports = function (grunt) {
         'clean:pre',
         'clean:rails',                    // CarmineM74
         'copy:pre',
-        //'turnOffPotatoDeclaration',
+        'turnOffPotatoDeclaration',       // CarmineM74: Still required because of couchPotato registerXXXX method calls scattered through the sources ...
         'ngAnnotate:tmp',
         //'turnOnPotatoDeclaration',
         'adjustTemplateUrls',
