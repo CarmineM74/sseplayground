@@ -8,25 +8,25 @@ define(['angular',
     var module = ng.module('app.layout', ['ui.router']);
 
 
-    module.config(function ($stateProvider, $ocLazyLoadProvider, $urlRouterProvider) {
+    module.config(["$stateProvider", "$ocLazyLoadProvider", "$urlRouterProvider", function ($stateProvider, $ocLazyLoadProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('app', {
                 abstract: true,
                 views: {
                     root: {
-                        templateUrl: 'app/layout/layout.tpl.html',
+                        templateUrl: 'build/layout/layout.tpl.html',
                         resolve: {
-                            deps: function($ocLazyLoad) {
+                            deps: ["$ocLazyLoad", function($ocLazyLoad) {
                               return $ocLazyLoad.load('app.auth')
-                            } 
+                            }] 
                         }
                     }
                 }
             });
         $urlRouterProvider.otherwise('/dashboard');
 
-    });
+    }]);
 
     return module;
 

@@ -23,7 +23,7 @@ define [
                   views: {
                       "content@app": {
                           controller: 'DashboardCtrl',
-                          templateUrl: 'app/dashboard/dashboard.html',
+                          templateUrl: 'build/dashboard/dashboard.html',
                           resolve: {
                               deps: ($ocLazyLoad) -> $ocLazyLoad.load('app.dashboard')
                           }

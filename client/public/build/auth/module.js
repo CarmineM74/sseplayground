@@ -21,7 +21,7 @@ define([
         facebookAppId: '620275558085318'
     };
 
-    module.config(function ($stateProvider, $ocLazyLoadProvider
+    module.config(["$stateProvider", "$ocLazyLoadProvider", function ($stateProvider, $ocLazyLoadProvider
 //        , ezfbProvider
 //        , GooglePlusProvider
         ) {
@@ -51,11 +51,11 @@ define([
 
             views: {
                 root: {
-                    templateUrl: "app/auth/login/login.html",
+                    templateUrl: "build/auth/login/login.html",
                     controller: 'LoginCtrl',
                     resolve: {
-                        deps: function($ocLazyLoad) {
-                          return $ocLazyLoad.load('app.auth')}
+                        deps: ["$ocLazyLoad", function($ocLazyLoad) {
+                          return $ocLazyLoad.load('app.auth')}]
                     }
                 }
             },
@@ -70,7 +70,7 @@ define([
             url: '/login',
             views: {
                 root: {
-                    templateUrl: 'app/auth/views/login.html'
+                    templateUrl: 'build/auth/views/login.html'
                 }
             },
             data: {
@@ -88,7 +88,7 @@ define([
             url: '/register',
             views: {
                 root: {
-                    templateUrl: 'app/auth/views/register.html'
+                    templateUrl: 'build/auth/views/register.html'
                 }
             },
             data: {
@@ -106,7 +106,7 @@ define([
             url: '/forgot-password',
             views: {
                 root: {
-                    templateUrl: 'app/auth/views/forgot-password.html'
+                    templateUrl: 'build/auth/views/forgot-password.html'
                 }
             },
             data: {
@@ -124,7 +124,7 @@ define([
             url: '/lock',
             views: {
                 root: {
-                    templateUrl: 'app/auth/views/lock.html'
+                    templateUrl: 'build/auth/views/lock.html'
                 }
             },
             data: {
@@ -134,7 +134,7 @@ define([
         })
 
 
-    }).constant('authKeys', authKeys);
+    }]).constant('authKeys', authKeys);
 
     return module;
 });

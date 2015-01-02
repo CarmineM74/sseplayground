@@ -26,9 +26,9 @@ define([
         'ui.router',
         'ui.bootstrap'
         // App
-        //'app.auth',
-        //'app.layout',
-        //'app.dashboard'
+        ,'app.auth'
+        ,'app.layout'
+        ,'app.dashboard'
     ]);
 
     app.config(function ($provide, $httpProvider, $ocLazyLoadProvider) {
